@@ -6,7 +6,7 @@ import MainContent from './components/MainContent/MainContent';
 import Dashboard from './pages/Dashboard';
 import Device from './pages/Device';
 import User from './pages/User';
-import Employee from './pages/Employee';
+import HistoryLog from './pages/HistoryLog';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/devices" element={<Device />} />
             <Route path="/user" element={<User />} />
-            <Route path="/employee" element={<Employee />} />
+            <Route path="/log" element={<HistoryLog />} />
           </Routes>
         </MainContent>
       </BrowserRouter>
