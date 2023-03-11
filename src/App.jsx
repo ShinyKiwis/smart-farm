@@ -4,7 +4,7 @@ import './App.css'
 import SideBar from './components/SideBar/SideBar';
 import MainContent from './components/MainContent/MainContent';
 import Dashboard from './pages/Dashboard';
-import Device from './pages/Device/Device';
+import Device from './pages/Device';
 import User from './pages/User';
 import HistoryLog from './pages/HistoryLog';
 import Login from './pages/Login';
@@ -14,7 +14,7 @@ import WaterPumps from './components/WaterPumps';
 import AllDevices from './pages/Device/AllDevices';
 
 function App() {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(true);
   if(!auth){
     return <Login />
   }

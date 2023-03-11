@@ -1,0 +1,10 @@
+.history-logs__table{
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 0.2rem;
+}
+
+.history-logs__table td{
+    word-break: break-all;
+    font-style: italic;
+}
