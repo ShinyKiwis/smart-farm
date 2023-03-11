@@ -56,7 +56,8 @@
 .avatar img{
     width: 2.5em;
     height: 2.5em;
-    margin:0em 2em;
+    margin-left:4em;
+    margin-right:1em;
 }
 .avatar .avatar_info{
     color:var(--color-383838);
@@ -93,7 +94,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    width:90%;
+    width:70%;
 }
 .sidebar_item:hover, .sub_sidebar_item:hover {
     background-color: var(--color-C8DCC6);
@@ -103,7 +104,8 @@
 .sidebar_img  {
     width: 2.5em;
     height: auto;
-    margin:0em 1em;
+    margin-left:0em;
+    margin-right:1em;
 }
 
 .devices_popout{
@@ -117,17 +119,25 @@
     bottom:0;
     top:90%;
     right:0;
-    left:0;
+    left:3em;
 }
 .logout .sidebar_link{
     color:var(--color-383838);
     display:block;
+    font-size: 14px;
 }
 .logout .sidebar_item{
     width:50%;
     margin-left:1.5em;
 }
+.logout .sidebar_item .sidebar_img{
+    background-color: var(--color-D9D9D9);
+    border-radius: 10px;
+}
 .logout .sidebar_item:hover{
     color:var(--color-C8DCC6);
     background-color: transparent;
+}
+.logout .sidebar_item:hover .sidebar_img{
+    background-color: var(--color-383838);
 }

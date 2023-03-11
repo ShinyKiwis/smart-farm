@@ -7,9 +7,13 @@ import Dashboard from './pages/Dashboard';
 import Device from './pages/Device';
 import User from './pages/User';
 import HistoryLog from './pages/HistoryLog';
+import Login from './pages/Login';
 
 function App() {
-
+  const [auth, setAuth] = useState(true);
+  if(!auth){
+    return <Login />
+  }
   return (
     <div className="App">
       <BrowserRouter>
@@ -20,6 +24,7 @@ function App() {
             <Route path="/devices" element={<Device />} />
             <Route path="/user" element={<User />} />
             <Route path="/log" element={<HistoryLog />} />
+            <Route path="/login" element={<Dashboard />} />
           </Routes>
         </MainContent>
       </BrowserRouter>
