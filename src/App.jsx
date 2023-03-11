@@ -4,11 +4,14 @@ import './App.css'
 import SideBar from './components/SideBar/SideBar';
 import MainContent from './components/MainContent/MainContent';
 import Dashboard from './pages/Dashboard';
-import Device from './pages/Device';
+import Device from './pages/Device/Device';
 import User from './pages/User';
 import HistoryLog from './pages/HistoryLog';
 import Login from './pages/Login';
 import SetPassword from './pages/SetPassword';
+import Lights from './components/Lights';
+import WaterPumps from './components/WaterPumps';
+import AllDevices from './pages/Device/AllDevices';
 
 function App() {
   const [auth, setAuth] = useState(true);
@@ -22,7 +25,11 @@ function App() {
         <MainContent>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/devices" element={<Device />} />
+            <Route path="/devices" element={<Device />}>
+              <Route index element={<AllDevices />}  />
+              <Route path="lights" element={<Lights />} />
+              <Route path="water-pumps" element={<WaterPumps />} />
+            </Route>
             <Route path="/user" element={<User />} />
             <Route path="/password" element={<SetPassword />} />
             <Route path="/log" element={<HistoryLog />} />

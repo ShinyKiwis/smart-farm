@@ -99,8 +99,8 @@ const Sidebar = () => {
             <SideBarItem Item={BiHomeAlt2} page="Dashboard" href="/" />
             <div onMouseOver={() => setOnHover(true)} onMouseOut={() => setOnHover(false)}>
             <SubSideBarItem Item={BiCategory} page="Devices" href="/devices" onHover={onHover} 
-                            SubItem1={BiBulb} Subpage1="Light" Subhref1="/devices"
-                            SubItem2={MdOutlineWaterDrop} Subpage2="Water Pump" Subhref2="/devices"
+                            SubItem1={BiBulb} Subpage1="Light" Subhref1="/devices/lights"
+                            SubItem2={MdOutlineWaterDrop} Subpage2="Water Pump" Subhref2="/devices/water-pumps"
                             />
             </div>
             <SideBarItem Item={BiHistory} page="History Logs" href="/log" />

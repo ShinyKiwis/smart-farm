@@ -1,0 +1,24 @@
+.water-pumps__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem;
+  margin-top: 0.2rem;
+}
+
+.water-pumps__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fbf7f4;
+  padding: 0.25rem 1.5rem;
+  margin-top: 0.2rem;
+}
+
+.water-pumps__item.active {
+  background: #c8dcc6;
+}
+
+.water-pumps__item p {
+  text-transform: uppercase;
+}
