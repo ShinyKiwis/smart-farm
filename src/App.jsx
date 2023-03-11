@@ -8,6 +8,7 @@ import Device from './pages/Device';
 import User from './pages/User';
 import HistoryLog from './pages/HistoryLog';
 import Login from './pages/Login';
+import SetPassword from './pages/SetPassword';
 
 function App() {
   const [auth, setAuth] = useState(true);
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/devices" element={<Device />} />
             <Route path="/user" element={<User />} />
+            <Route path="/password" element={<SetPassword />} />
             <Route path="/log" element={<HistoryLog />} />
             <Route path="/login" element={<Dashboard />} />
           </Routes>

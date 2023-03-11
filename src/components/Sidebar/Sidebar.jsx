@@ -11,11 +11,16 @@ import {
 } from "react-icons/bi"
 import {
   AiOutlineSetting,
-  AiOutlineLogout
+  AiOutlineLogout,
+  AiOutlineUser,
 } from "react-icons/ai"
 import {
   MdOutlineWaterDrop,
 } from "react-icons/md"
+import {
+  RiLockPasswordLine,
+} from "react-icons/ri"
+
 
 
 const Logo = () => {
@@ -53,7 +58,7 @@ const SideBarItem = ({ Item, page, href, }) => {
     </>
   );
 };
-const SubSideBarItem = ({ Item, page,onHover, href, }) => {
+const SubSideBarItem = ({ Item, page,onHover, href, SubItem1, Subpage1, Subhref1, SubItem2, Subpage2, Subhref2 }) => {
   return (
     <>
       <Link className="sub_sidebar_link" to={href} >
@@ -65,8 +70,8 @@ const SubSideBarItem = ({ Item, page,onHover, href, }) => {
         </div>
       </Link>
       <div className='devices_popout' style={onHover ? { display: "block" } : { display: "none" }}>
-        <SideBarItem Item={BiBulb} page="Light" href="/devices" />
-        <SideBarItem Item={MdOutlineWaterDrop} page="Water Pump" href="/devices" />
+        <SideBarItem Item={SubItem1} page={Subpage1} href={Subhref1} />
+        <SideBarItem Item={SubItem2} page={Subpage2} href={Subhref2} />
       </div>
     </>
   );
@@ -83,17 +88,28 @@ const Logout = () => {
 
 const Sidebar = () => {
   const [onHover, setOnHover] = useState(false);
+  const [onHover2, setOnHover2] = useState(false);
   return (
     <div>
       <div className='bground'>
         <div className='sidebar'>
           <Logo/>
           <Avatar/>
-          <div className='sidebar_container' onMouseOver={() => setOnHover(true)} onMouseOut={() => setOnHover(false)}>
+          <div className='sidebar_container'>
             <SideBarItem Item={BiHomeAlt2} page="Dashboard" href="/" />
-            <SubSideBarItem Item={BiCategory} page="Devices" href="/devices" onHover={onHover} />
+            <div onMouseOver={() => setOnHover(true)} onMouseOut={() => setOnHover(false)}>
+            <SubSideBarItem Item={BiCategory} page="Devices" href="/devices" onHover={onHover} 
+                            SubItem1={BiBulb} Subpage1="Light" Subhref1="/devices"
+                            SubItem2={MdOutlineWaterDrop} Subpage2="Water Pump" Subhref2="/devices"
+                            />
+            </div>
             <SideBarItem Item={BiHistory} page="History Logs" href="/log" />
-            <SideBarItem Item={AiOutlineSetting} page="Setting" href="/user" />
+            <div onMouseOver={() => setOnHover2(true)} onMouseOut={() => setOnHover2(false)}>
+            <SubSideBarItem Item={AiOutlineSetting} page="Setting" href="/user" onHover={onHover2} 
+                            SubItem1={AiOutlineUser} Subpage1="Personal Infomation" Subhref1="/user"
+                            SubItem2={RiLockPasswordLine} Subpage2="Password" Subhref2="/password"
+                            />
+            </div>
           </div>
           <Logout/>
         </div>
