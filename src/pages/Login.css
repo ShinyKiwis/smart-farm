@@ -1,0 +1,125 @@
+:root{
+    --color-FBF7F4: #FBF7F4;
+    --color-C8DCC6: #C8DCC6;
+    --color-72a16e: #72a16e;
+    --color-F1F1F1: #F1F1F1;
+    --color-D9D9D9: #D9D9D9;
+    --color-ACACAC: #ACACAC;
+    --color-383838: #383838;
+}
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-C8DCC6);
+}
+.login_container .container{
+    position:absolute;
+    left:10vw;
+    top:3vh;
+    bottom:0;
+    right:0;
+    background-color: var(--color-FBF7F4);
+    width:80vw;
+    height:90vh;
+    border-radius: 20px;
+}
+.login_container .logo{
+    display:flex;
+    position:absolute;
+    top:1em;
+    left:2em;
+    bottom:0;
+    right:0;
+    width:fit-content;
+}
+.login_container .logo h4{
+    margin-left:.5em;
+    margin-top:1em;
+    font-size: 20px;
+}
+
+.login_container .side_image{
+    position: absolute;
+    left:50%;
+    width:50%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+}
+.login_container .side_image img{
+    width:95%;
+    height:95%;
+    margin-top:1em;
+    border-radius: 20px;
+}
+/*---login form---*/
+.login_container .login-wrapper{
+    position: absolute;
+    width:50%;
+    left:0;
+    top:25%;
+    bottom:0;
+    right:50%;
+}
+
+.login_container .form-group input{
+    height:2.5em;
+    width:20em;
+    margin:.3em;
+    border-radius: 5px;
+    border:solid 1px var(--color-383838);
+}
+.login_container .form-group-check {
+    color:var(--color-ACACAC);
+}
+.login_container .form-group-check #checkbox{
+    height: 1.2em;
+    margin-left:-10em;  
+    margin-right:0em;
+    width:2em;
+}
+.login_container .form-button button{
+    height:3em;
+    width:20em;
+    margin-top:2em;
+    border-radius: 5px;
+    border:none;
+    background-color: var(--color-C8DCC6);
+    color:var(--color-383838);
+    font-weight: bold;
+}
+.login_container .form-button button:hover{
+    background-color: var(--color-72a16e);
+    cursor: pointer;
+    color:#F1F1F1;
+}
+.login_container .login-wrapper h4{
+    color: var(--color-ACACAC);
+    margin-top:.5em;
+    margin-left:-6em;
+}
+.login_container .login-wrapper h4:hover{
+    color: var(--color-383838);
+    cursor: pointer;
+}
+
+.login_container .login-wrapper .signup{
+    position: absolute;
+    top:90%;
+    left:44%;
+    display:flex;
+    justify-content: center;
+}
+.login_container .login-wrapper .signup h3{
+    color: var(--color-C8DCC6);
+    margin-top:.4em;
+    margin-left:.5em;
+}
+.login_container .login-wrapper .signup h3:hover{
+    color: var(--color-72a16e);
+    margin-top:.4em;
+    margin-left:.5em;
+    cursor: pointer;
+}
+.login_container .login-wrapper .signup h4:hover{
+    color: var(--color-ACACAC)
+}

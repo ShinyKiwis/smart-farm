@@ -11,7 +11,7 @@ import Login from './pages/Login';
 import SetPassword from './pages/SetPassword';
 
 function App() {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
   if(!auth){
     return <Login />
   }
