@@ -14,7 +14,7 @@ import WaterPumps from './components/WaterPumps';
 import AllDevices from './pages/Device/AllDevices';
 
 function App() {
-  const [auth, setAuth] = useState(true);
+  const [auth, setAuth] = useState(false);
   if(!auth){
     return <Login />
   }
