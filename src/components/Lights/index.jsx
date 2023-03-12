@@ -1,13 +1,19 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SwitchControl from '../SwitchControl';
 import './styles.css';
 
-const LightItem = ({ onSwitch, light }) => (
-  <div className="lights__item">
-    <p>{light.name}</p>
-    <SwitchControl active={light.active} onSwitch={onSwitch} />
-  </div>
-);
+const LightItem = ({ onSwitch, light }) => {
+  const navigate = useNavigate();
+  return (
+    <div className="lights__item">
+      <p onClick={() => navigate(`${light.id}`)}>{light.name}</p>
+      <SwitchControl active={light.active} onSwitch={onSwitch} />
+    </div>
+  );
+};
 
 const Lights = () => {
   const [lights, setLights] = useState([

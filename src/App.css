@@ -13,9 +13,8 @@ body{
 
 .page-title{
   text-transform: uppercase;
-  margin: 0 0 1.5rem 0;
 }
 
 .padding-wrapper{
-  padding: 3rem;
+  padding: 1.5rem 3rem;
 }

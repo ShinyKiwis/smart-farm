@@ -1,0 +1,134 @@
+.schedule-detail {
+  position: absolute;
+  z-index: 99;
+  background: #ffffff;
+  top: 7rem;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.schedule-detail__time-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.schedule-detail__time-picker h1 {
+  font-weight: 600;
+}
+
+.schedule-detail__days-picker {
+  margin-top: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+}
+
+.schedule-detail__days-picker p {
+  width: 60px;
+  background: #fbf7f4;
+  padding: 0.5rem 0;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.schedule-detail__days-picker p.active {
+  background: #c8dcc6;
+}
+
+.schedule-detail__field  {
+    margin-top: 2rem;
+  padding: 0 3rem;
+  padding-right: 5rem;
+}
+
+.schedule-detail__field input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  border-bottom: 1px solid #acacac;
+  font-size: 1.3rem;
+  outline: none;
+}
+
+.schedule-detail__field input::placeholder {
+  color: #acacac;
+  opacity: 0.5;
+}
+
+.schedule-detail__field button{
+    width: 150px;
+    padding: 0.8rem 0;
+    border-radius: 10px;
+    background: #C8DCC6;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 4rem;
+    margin-right: -25px;
+    float: right;
+}
+
+select {
+  display: none !important;
+}
+
+.react-time-picker {
+  height: 200px;
+  width: 350px;
+  background-color: #fbf7f4;
+  border-radius: 10px;
+}
+
+.react-time-picker__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: none !important;
+  justify-content: center !important;
+}
+
+.react-time-picker__wrapper input {
+  font-size: 5rem;
+  letter-spacing: -5px;
+}
+.react-time-picker__wrapper span {
+  font-size: 5rem;
+  margin: 0 0.3rem;
+}
+
+.react-time-picker__inputGroup {
+  height: 100%;
+  width: 350px;
+  padding-left: 50px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-time-picker__inputGroup span:first-child {
+  text-align: right;
+  margin-right: -24px !important;
+}
+
+.react-time-picker__inputGroup__leadingZero:nth-child(1) {
+  text-align: right;
+  margin-right: -24px !important;
+}
+
+.react-time-picker__inputGroup__hour {
+  width: 85px !important;
+  text-align: center;
+  outline: none;
+}
+.react-time-picker__inputGroup__minute {
+  width: 85px !important;
+  outline: none;
+}

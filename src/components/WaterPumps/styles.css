@@ -21,4 +21,5 @@
 
 .water-pumps__item p {
   text-transform: uppercase;
+  cursor: pointer;
 }

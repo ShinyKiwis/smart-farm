@@ -1,13 +1,18 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SwitchControl from '../SwitchControl';
 import './styles.css';
 
-const WaterPumpItem = ({ onSwitch, waterPump }) => (
+const WaterPumpItem = ({ onSwitch, waterPump }) => {
+  const navigate = useNavigate()
+  return (
   <div className="water-pumps__item">
-    <p>{waterPump.name}</p>
+    <p onClick={() => navigate(`${waterPump.id}`)}>{waterPump.name}</p>
     <SwitchControl active={waterPump.active} onSwitch={onSwitch} />
   </div>
-);
+)};
 
 const WaterPumps = () => {
   const [waterPumps, setWaterPumps] = useState([

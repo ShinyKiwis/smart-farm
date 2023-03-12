@@ -12,6 +12,7 @@ import SetPassword from './pages/SetPassword';
 import Lights from './components/Lights';
 import WaterPumps from './components/WaterPumps';
 import AllDevices from './pages/Device/AllDevices';
+import DeviceDetail from './pages/Device/DeviceDetail';
 
 function App() {
   const [auth, setAuth] = useState(true);
@@ -30,6 +31,8 @@ function App() {
               <Route path="lights" element={<Lights />} />
               <Route path="water-pumps" element={<WaterPumps />} />
             </Route>
+            <Route path="/devices/lights/:id" element={<DeviceDetail />} />
+            <Route path="/devices/water-pumps/:id" element={<DeviceDetail />} />
             <Route path="/user" element={<User />} />
             <Route path="/password" element={<SetPassword />} />
             <Route path="/log" element={<HistoryLog />} />
