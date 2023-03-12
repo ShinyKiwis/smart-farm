@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import './App.css'
 import SideBar from './components/SideBar/SideBar';
 import MainContent from './components/MainContent/MainContent';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
 import Device from './pages/Device';
-import User from './pages/User';
+import User from './pages/Setting/User';
 import HistoryLog from './pages/HistoryLog';
-import Login from './pages/Login';
-import SetPassword from './pages/SetPassword';
+import Login from './pages/Login/Login';
+import SetPassword from './pages/Setting/SetPassword';
 import Lights from './components/Lights';
 import WaterPumps from './components/WaterPumps';
 import AllDevices from './pages/Device/AllDevices';

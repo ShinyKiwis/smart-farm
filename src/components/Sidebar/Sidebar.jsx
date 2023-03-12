@@ -35,7 +35,7 @@ const Logo = () => {
 const Avatar = () => {
   return (
     <div className='avatar'>
-      <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" />
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjYmlp9JDeNMaFZzw9S3G1dVztGqF_2vq9nA&usqp=CAU" />
       <div className='avatar_info'>
         <h4><b>Push in boots</b></h4>
         <h5>Administrator</h5>

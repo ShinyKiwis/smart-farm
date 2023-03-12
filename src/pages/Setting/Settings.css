@@ -1,0 +1,124 @@
+:root{
+    --color-FBF7F4: #FBF7F4;
+    --color-C8DCC6: #C8DCC6;
+    --color-72a16e: #a0e09b;
+    --color-F1F1F1: #F1F1F1;
+    --color-D9D9D9: #D9D9D9;
+    --color-ACACAC: #ACACAC;
+    --color-383838: #383838;
+}
+.user hr{
+    width:90%;
+    color: var(--color-C8DCC6);
+}
+.user .setavatar{
+    display: block;
+    width:5em;
+    text-align: center;
+    
+}
+.user .setavatar img{
+    width:4em;
+    height: 4em;
+    margin-left:2em;
+    border-radius: 50%;
+}
+.user .avaSetting{
+    display:flex;
+    gap: 4em;
+    justify-content: center;
+}
+.user .avaSetting button{
+    margin:.2em;
+    width: 8em;
+    height:2.5em;
+    border-radius: 10px; 
+    border:none;
+    font-weight: bold;
+    margin-top:1.5em;
+}
+.user .avaSetting button:hover{
+    background-color:  var(--color-ACACAC);
+    cursor: pointer;
+}
+.user .avaSetting .upload{
+    background-color: var(--color-C8DCC6);
+    color:white;
+}
+.user .avaSetting .upload:hover{
+    background-color: var(--color-72a16e);
+    color:white;
+    cursor: pointer;
+}
+
+/*---Form---*/
+.user .form{
+    text-align: left;
+    font-size: 20px;
+}
+.user .form .input {
+    display: flex;
+    margin:1em 0em;
+}
+.user .form .input label{
+    font-weight: bold;
+    width:7em;
+    padding:0 6em
+}
+.user .form .input input{
+    height:2.5em;
+    width:20em;
+    border-radius: 5px;
+    border: solid 1px var(--color-383838);
+}
+.user .form .submit{
+    display:flex;
+    justify-content: right;
+    margin-right:16em;
+}
+.user .form .submit button{
+    margin:.2em;
+    width: 8em;
+    height:2.5em;
+    border-radius: 10px; 
+    border:none;
+    font-weight: bold;
+    margin-top:1.5em;
+}
+.user .form .submit .save{
+    background-color: var(--color-C8DCC6);
+    color:white;
+}
+.user .form .submit .save:hover{
+    background-color: var(--color-72a16e);
+    color:white;
+    cursor: pointer;
+}
+.user .submit button:hover{
+    background-color:  var(--color-ACACAC);
+    cursor: pointer;
+}
+
+
+/*---Password---*/
+.user .ava{
+    display: flex;
+    justify-content: center;
+    gap:2em;
+}
+.user .ava img{
+    width: 5em;
+    height: 5em;
+    margin-left:2em;
+    border-radius: 50%;
+}
+.ava .avatar_info{
+    color:var(--color-383838);
+}
+.ava .avatar_info h4{
+    margin-top:.5em;
+}
+.ava .avatar_info h5{
+    margin-top:-1em;
+    color: var(--color-ACACAC);
+}

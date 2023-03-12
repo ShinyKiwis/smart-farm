@@ -59,6 +59,7 @@ body{
     top:25%;
     bottom:0;
     right:50%;
+    text-align: center;
 }
 
 .login_container .form-group input{

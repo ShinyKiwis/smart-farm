@@ -41,6 +41,7 @@
 .logo img{
     width: 2.5em;
     height: auto;
+    margin-left:2em;
 }
 .logo h4{
     font-size: 15px;
@@ -59,6 +60,7 @@
     width: 2.5em;
     height: 2.5em;
     margin-right:1em;
+    border-radius: 50%;
 }
 .avatar .avatar_info{
     color:var(--color-383838);
