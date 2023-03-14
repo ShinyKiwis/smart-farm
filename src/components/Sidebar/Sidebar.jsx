@@ -69,7 +69,7 @@ const SubSideBarItem = ({ Item, page,onHover, href, SubItem1, Subpage1, Subhref1
           </h3>
         </div>
       </Link>
-      <div className='devices_popout' style={onHover ? { display: "block" } : { display: "none" }}>
+      <div className='devices_popout' /*style={onHover ? { display: "block" } : { display: "none" }}*/>
         <SideBarItem Item={SubItem1} page={Subpage1} href={Subhref1} />
         <SideBarItem Item={SubItem2} page={Subpage2} href={Subhref2} />
       </div>
