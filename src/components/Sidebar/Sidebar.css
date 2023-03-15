@@ -6,6 +6,10 @@
     --color-ACACAC: #ACACAC;
     --color-383838: #383838;
 }
+body{
+    background-attachment: fixed;
+    font-family: 'Roboto Condensed';
+}
 .bground{
     background-color: var(--color-FBF7F4);
     width:100vw;
@@ -22,8 +26,8 @@
     background-color: transparent;
     display:flex;
     justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+    overflow:hidden;
+    font-family: 'Roboto Condensed';
 }
 /*---Logo---*/
 .logo {
@@ -46,6 +50,7 @@
 .logo h4{
     font-size: 15px;
     margin-top:0em;    
+    font-family: 'Roboto Condensed';
 }
 /*---Avatar---*/
 .avatar{
@@ -67,10 +72,12 @@
 }
 .avatar .avatar_info h4{
     margin-top:0em;
+    font-family: 'Roboto Condensed';
 }
 .avatar .avatar_info h5{
     margin-top:-1.5em;
     color: var(--color-ACACAC);
+    font-family: 'Roboto Condensed';
 }
 /*---Sidebar---*/
 .sidebar_container{
@@ -92,23 +99,34 @@
 .sidebar_container h3, .logout h3 {
     white-space: nowrap;
     font-weight: bold;
+    margin:0;
+    font-size: 1.2em;
+
 }
 .sidebar_item, .sub_sidebar_item {
     display: flex;
     align-items: center;
     cursor: pointer;
     width:70%;
+    padding: .8em 1em;
 }
 .sidebar_item:hover, .sub_sidebar_item:hover {
     background-color: var(--color-C8DCC6);
     color: var(--color-383838);
     border-radius: 15px;
 }
+.sidebar_item.active, .sub_sidebar_item.active {
+    background-color: var(--color-C8DCC6);
+    color: var(--color-383838);
+    border-radius: 15px;
+}
+
 .sidebar_img  {
-    width: 2.5em;
+    width: 1.8em;
     height: auto;
     margin-left:0em;
     margin-right:1em;
+
 }
 
 .devices_popout{
@@ -122,7 +140,7 @@
     bottom:0;
     top:90%;
     right:0;
-    left:3em;
+    left:0em;
 }
 .logout .sidebar_link{
     color:var(--color-383838);
@@ -132,16 +150,9 @@
     justify-content: center;
 }
 .logout .sidebar_item{
-    width:50%;
-}
-.logout .sidebar_item .sidebar_img{
-    background-color: var(--color-D9D9D9);
-    border-radius: 10px;
+    width:fit-content;
+    padding:0.5em 1em;
 }
 .logout .sidebar_item:hover{
-    color:var(--color-C8DCC6);
-    background-color: transparent;
-}
-.logout .sidebar_item:hover .sidebar_img{
-    background-color: var(--color-383838);
+    background-color: var(--color-ACACAC);
 }

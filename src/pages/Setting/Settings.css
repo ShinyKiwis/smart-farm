@@ -2,6 +2,7 @@
     --color-FBF7F4: #FBF7F4;
     --color-C8DCC6: #C8DCC6;
     --color-72a16e: #a0e09b;
+    --color-9bc898: #9bc898;
     --color-F1F1F1: #F1F1F1;
     --color-D9D9D9: #D9D9D9;
     --color-ACACAC: #ACACAC;
@@ -121,4 +122,24 @@
 .ava .avatar_info h5{
     margin-top:-1em;
     color: var(--color-ACACAC);
+}
+
+.setting{
+    display: flex;
+    justify-content: center;
+}
+.setting button{
+    width:15em;
+    height:4em;
+    margin:0 .5em;
+    font-family: 'Roboto Condensed';
+    background-color: var(--color-C8DCC6);
+    border:none;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.setting button:hover{
+    background-color: var(--color-9bc898);
+    cursor: pointer;
 }

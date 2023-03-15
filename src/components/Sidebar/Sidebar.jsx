@@ -1,25 +1,23 @@
 import React from 'react'
 import './Sidebar.css'
-import {Link} from "react-router-dom"
+import {Link, useLocation} from "react-router-dom"
 import { useState } from "react";
 
 import {
-  BiCategory,
-  BiHomeAlt2,
-  BiHistory,
-  BiBulb,
-} from "react-icons/bi"
-import {
-  AiOutlineSetting,
   AiOutlineLogout,
-  AiOutlineUser,
+  AiFillSetting,
 } from "react-icons/ai"
 import {
-  MdOutlineWaterDrop,
+  MdDashboard,
+  MdIntegrationInstructions,
+  MdLightbulb,
+  MdWaterDrop
 } from "react-icons/md"
 import {
-  RiLockPasswordLine,
-} from "react-icons/ri"
+  FaHistory,
+  FaUser,
+  FaLock
+} from "react-icons/fa"
 
 
 
@@ -44,13 +42,18 @@ const Avatar = () => {
   )
 }
 
-const SideBarItem = ({ Item, page, href, }) => {
+const SideBarItem = ({ Item, page, href }) => {
+  const location = useLocation();
+
+  // Check if the current path matches the `href` prop
+  const isActive = location.pathname === href;
+
   return (
     <>
-      <Link className="sidebar_link" to={href} >
-        <div className="sidebar_item">
-          {<Item className="sidebar_img" />}
-          <h3>
+      <Link className="sidebar_link" to={href}>
+        <div className={isActive ? "sidebar_item active" : "sidebar_item"}>
+          {<Item className="sidebar_img" size={".8em"} />}
+          <h3 className={isActive ? "active" : ""}>
             {page}
           </h3>
         </div>
@@ -59,10 +62,14 @@ const SideBarItem = ({ Item, page, href, }) => {
   );
 };
 const SubSideBarItem = ({ Item, page,onHover, href, SubItem1, Subpage1, Subhref1, SubItem2, Subpage2, Subhref2 }) => {
+  const location = useLocation();
+
+  // Check if the current path matches the `href` prop
+  const isActive = location.pathname === href;
   return (
     <>
       <Link className="sub_sidebar_link" to={href} >
-        <div className="sub_sidebar_item">
+        <div className={isActive ? "sub_sidebar_item active" : "sub_sidebar_item"}>
           {<Item className="sidebar_img" />}
           <h3>
             {page}
@@ -96,18 +103,18 @@ const Sidebar = () => {
           <Logo/>
           <Avatar/>
           <div className='sidebar_container'>
-            <SideBarItem Item={BiHomeAlt2} page="Dashboard" href="/" />
+            <SideBarItem Item={MdDashboard} page="Dashboard" href="/" id="dashboard" />
             <div onMouseOver={() => setOnHover(true)} onMouseOut={() => setOnHover(false)}>
-            <SubSideBarItem Item={BiCategory} page="Devices" href="/devices" onHover={onHover} 
-                            SubItem1={BiBulb} Subpage1="Light" Subhref1="/devices/lights"
-                            SubItem2={MdOutlineWaterDrop} Subpage2="Water Pump" Subhref2="/devices/water-pumps"
+            <SubSideBarItem Item={MdIntegrationInstructions} page="Devices" href="/devices" onHover={onHover} id="device"
+                            SubItem1={MdLightbulb} Subpage1="Light" Subhref1="/devices/lights"
+                            SubItem2={MdWaterDrop} Subpage2="Water Pump" Subhref2="/devices/water-pumps"
                             />
             </div>
-            <SideBarItem Item={BiHistory} page="History Logs" href="/log" />
+            <SideBarItem Item={FaHistory} page="History Logs" href="/log" id="log"/>
             <div onMouseOver={() => setOnHover2(true)} onMouseOut={() => setOnHover2(false)}>
-            <SubSideBarItem Item={AiOutlineSetting} page="Setting" href="/user" onHover={onHover2} 
-                            SubItem1={AiOutlineUser} Subpage1="Personal Infomation" Subhref1="/user"
-                            SubItem2={RiLockPasswordLine} Subpage2="Password" Subhref2="/password"
+            <SubSideBarItem Item={AiFillSetting} page="Setting" href="/setting" onHover={onHover2} id="setting"
+                            SubItem1={FaUser} Subpage1="Personal Infomation" Subhref1="/user"
+                            SubItem2={FaLock} Subpage2="Password" Subhref2="/password"
                             />
             </div>
           </div>

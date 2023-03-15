@@ -6,6 +6,7 @@ import MainContent from './components/MainContent/MainContent';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Device from './pages/Device';
 import User from './pages/Setting/User';
+import Setting from './pages/Setting/Setting';
 import HistoryLog from './pages/HistoryLog';
 import Login from './pages/Login/Login';
 import SetPassword from './pages/Setting/SetPassword';
@@ -35,6 +36,7 @@ function App() {
             <Route path="/devices/water-pumps/:id" element={<DeviceDetail />} />
             <Route path="/user" element={<User />} />
             <Route path="/password" element={<SetPassword />} />
+            <Route path="/setting" element={<Setting />} />
             <Route path="/log" element={<HistoryLog />} />
             <Route path="/login" element={<Dashboard />} />
           </Routes>
