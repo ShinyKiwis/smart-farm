@@ -28,3 +28,11 @@ body{
   padding: 1.5rem 3rem;
   padding-bottom:0;
 }
+
+.flex-center-between{
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+}
+
+.

@@ -70,6 +70,10 @@ const DeviceDetail = () => {
     };
     getData()
   }, [id,location]);
+
+  const handleSaveSchedule = () => {
+    setScheduleSelect(null)
+  }
   
   return (
     <div className="device-detail padding-wrapper">
@@ -94,7 +98,7 @@ const DeviceDetail = () => {
         ))}
       </div>
 
-      {scheduleSelect && <ScheduleDetail schedule={scheduleSelect}/>}
+      {scheduleSelect && <ScheduleDetail onSave={handleSaveSchedule} schedule={scheduleSelect}/>}
     
   </div>);
 };

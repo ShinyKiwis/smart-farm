@@ -23,3 +23,15 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+
+.water-pumps__item__actions{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.water-pumps__item__actions > div{
+  padding: 0;
+  gap: 0.5rem;
+}
+

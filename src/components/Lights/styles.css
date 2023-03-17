@@ -24,3 +24,14 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+
+.lights__item__actions{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lights__item__actions > div{
+  padding: 0;
+  gap: 0.5rem;
+}

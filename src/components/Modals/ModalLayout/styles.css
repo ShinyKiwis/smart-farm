@@ -1,0 +1,24 @@
+.modal-layout{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.close-modal-mark{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;    
+    font-size: 1.3rem;  
+    cursor:pointer;
+}
+
+.close-modal-mark:hover{
+    opacity: 0.5;
+}

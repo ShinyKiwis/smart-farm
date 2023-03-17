@@ -1,11 +1,11 @@
 .schedule-detail {
   position: absolute;
   z-index: 99;
-  background: #ffffff;
-  top: 7rem;
+  background: white;
+  top: 6rem;
   left: 0;
   width: 100%;
-  height: 100%;
+  padding-top: 4rem;
 }
 
 .schedule-detail__time-picker {
@@ -34,6 +34,7 @@
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
+  text-align: center;
 }
 
 .schedule-detail__days-picker p.active {
@@ -74,7 +75,7 @@
     float: right;
 }
 
-select {
+.react-time-picker select {
   display: none !important;
 }
 

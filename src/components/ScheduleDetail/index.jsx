@@ -7,7 +7,7 @@ import './styles.css';
 
 const DAYS = ["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"]
 
-const ScheduleDetail = ({ schedule }) => {
+const ScheduleDetail = ({ schedule, onSave }) => {
   const [timeFrom, setTimeFrom] = useState(schedule.time.split(' - ')[0]);
   const [timeTo, setTimeTo] = useState(schedule.time.split(' - ')[1]);
 
@@ -26,6 +26,7 @@ const ScheduleDetail = ({ schedule }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        onSave()
     }
 
   return (

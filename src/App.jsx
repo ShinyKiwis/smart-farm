@@ -1,26 +1,32 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import './App.css'
-import SideBar from './components/SideBar/SideBar';
+import { createStore, Provider } from "jotai";
+import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import './App.css';
+import Lights from './components/Lights';
 import MainContent from './components/MainContent/MainContent';
+import SideBar from './components/SideBar/SideBar';
+import WaterPumps from './components/WaterPumps';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Device from './pages/Device';
-import User from './pages/Setting/User';
-import Setting from './pages/Setting/Setting';
+import AllDevices from './pages/Device/AllDevices';
+import DeviceDetail from './pages/Device/DeviceDetail';
 import HistoryLog from './pages/HistoryLog';
 import Login from './pages/Login/Login';
 import SetPassword from './pages/Setting/SetPassword';
-import Lights from './components/Lights';
-import WaterPumps from './components/WaterPumps';
-import AllDevices from './pages/Device/AllDevices';
-import DeviceDetail from './pages/Device/DeviceDetail';
+import Setting from './pages/Setting/Setting';
+import User from './pages/Setting/User';
+
+
+const myStore = createStore()
 
 function App() {
   const [auth, setAuth] = useState(true);
   if(!auth){
     return <Login />
   }
+  console.log("the fuck")
   return (
+    <Provider store={myStore}>
     <div className="App">
       <BrowserRouter>
         <SideBar />
@@ -43,6 +49,7 @@ function App() {
         </MainContent>
       </BrowserRouter>
     </div>
+    </Provider>
   )
 }
 

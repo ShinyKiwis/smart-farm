@@ -1,6 +1,14 @@
-import React, {useState} from 'react';
-import { FaSearch, FaFilter } from 'react-icons/fa';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useAtom } from 'jotai';
+import React, { useState } from 'react';
+import { FaSearch, FaFilter, FaPlus, FaPencilAlt, FaTrash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import ConfirmModal from '../../components/Modals/ConfirmModal';
+import DeviceModal from '../../components/Modals/DeviceModal';
 import SwitchControl from '../../components/SwitchControl';
+import {confirmModalAtom, deviceModalAtom} from "../../store"
 import './styles.css';
 
 const AllDevices = () => {
@@ -31,7 +39,7 @@ const AllDevices = () => {
       active: true,
     },
     {
-      id: 5,
+      id: 1,
       name: 'Light 1',
       active: true,
     },
@@ -45,6 +53,34 @@ const AllDevices = () => {
     setDevices(tempDevices);
   };
 
+  const navigate = useNavigate();
+  const navigateToDetailPage = (category, id) =>
+    navigate(`/devices/${category}/${id}`);
+
+  const [deviceModalAtomValue,setDeviceModalAtomValue] = useAtom(deviceModalAtom)
+  const handleOpenAddModal = () => {
+    setDeviceModalAtomValue({type: "ADD"})
+  }
+  const handleOpenEditModal = (device) => {
+    setDeviceModalAtomValue({type: "UPDATE", device})
+  }
+
+  
+
+  const handleDeleteDevice = (category, id) => {
+    alert("Delete device ", id)
+    if(category === "light"){
+      //call api
+      return;
+    }
+    //call api
+  } 
+
+  const [confirmModalAtomValue,setConfirmModalAtomValue] = useAtom(confirmModalAtom)
+  const handleOpenConfirmModal = (category, id) => {                           
+    setConfirmModalAtomValue({onAccept: () => handleDeleteDevice(category, id)})
+  }
+ 
   return (
     <>
       <div className="devices__finder">
@@ -55,6 +91,10 @@ const AllDevices = () => {
           </span>
         </div>
         <div className="devices__finder__filter">
+          <button className="devices__add" onClick={handleOpenAddModal}>
+            <FaPlus fontSize="1rem" />
+            Add Device
+          </button>
           <span>
             <FaFilter />
           </span>
@@ -67,12 +107,25 @@ const AllDevices = () => {
             <th>Name</th>
             <th>Categoty</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {devices.map((device) => (
             <tr key={device.id}>
-              <td>{device.name}</td>
+              <td
+                onClick={() =>
+                  navigateToDetailPage(
+                    device.name.toLowerCase().includes('light')
+                      ? 'lights'
+                      : 'water-pumps',
+                    device.id
+                  )
+                }
+                style={{ cursor: 'pointer' }}
+              >
+                {device.name}
+              </td>
               <td>
                 {device.name.toLowerCase().includes('light')
                   ? 'Light'
@@ -84,10 +137,16 @@ const AllDevices = () => {
                   onSwitch={() => handleToggleSwitch(device.id)}
                 />
               </td>
+              <td className='devices__table__actions'>
+                <span onClick={() => handleOpenEditModal(device)}><FaPencilAlt/></span>
+                <span onClick={() => handleOpenConfirmModal("light", device.id)}><FaTrash/></span>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {deviceModalAtomValue !== null  && <DeviceModal/>}
+      {confirmModalAtomValue !== null  && <ConfirmModal  message="Do you want to delete this device?"/>}
     </>
   );
 };

@@ -1,0 +1,45 @@
+.confirm-modal{
+    width: 500px;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    position: relative;
+}
+
+.confirm-modal__message{
+    margin: 0 0 1rem 0;
+}
+
+.confirm-modal__buttons{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    float: right;
+}
+
+.confirm-modal__buttons button{
+    margin: 0 auto;
+    display: block;
+    padding: 0.5rem 0.8rem;
+    background: #F1F1F1;
+    border: none;
+    border-radius: 10px;
+    font-weight: 800;
+    cursor: pointer;
+    color: #BBD6B8;
+
+}
+
+.confirm-modal__buttons button:first-child:hover{
+    color: #539165;
+}
+
+.confirm-modal__buttons button:nth-child(2){
+   background: #BBD6B8;
+   color: #fff;
+}
+
+.confirm-modal__buttons button:nth-child(2):hover{
+    background: #539165;
+ }
+

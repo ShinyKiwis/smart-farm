@@ -1,18 +1,48 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useAtom } from 'jotai';
 import React, { useState } from 'react';
+import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { confirmModalAtom, deviceModalAtom } from '../../store';
 import SwitchControl from '../SwitchControl';
 import './styles.css';
 
 const WaterPumpItem = ({ onSwitch, waterPump }) => {
-  const navigate = useNavigate()
+  const [deviceModalAtomValue, setDeviceModalAtomValue] =
+    useAtom(deviceModalAtom);
+  const handleOpenUpdateModal = () =>
+    setDeviceModalAtomValue({ type: 'UPDATE', device: waterPump });
+
+    const [,setConfirmModalAtomValue] = useAtom(confirmModalAtom)
+
+    const handleDeleteDevice = (category, id) => {
+  
+    }
+  
+    const handleOpenConfirmModal = (category, id) => {                           
+      setConfirmModalAtomValue({onAccept: () =>  (category, id)})
+    }
+
+  const navigate = useNavigate();
   return (
-  <div className="water-pumps__item">
-    <p onClick={() => navigate(`${waterPump.id}`)}>{waterPump.name}</p>
-    <SwitchControl active={waterPump.active} onSwitch={onSwitch} />
-  </div>
-)};
+    <div className="water-pumps__item">
+      <p onClick={() => navigate(`${waterPump.id}`)}>{waterPump.name}</p>
+      <div className="water-pumps__item__actions">
+        <div className="devices__table__actions">
+          <span onClick={handleOpenUpdateModal}>
+            <FaPencilAlt />
+          </span>
+          <span onClick={() => handleOpenConfirmModal("water-pump", waterPump.id)}>
+            <FaTrash />
+          </span>
+        </div>
+        <SwitchControl active={waterPump.active} onSwitch={onSwitch} />
+      </div>
+    </div>
+  );
+};
 
 const WaterPumps = () => {
   const [waterPumps, setWaterPumps] = useState([
