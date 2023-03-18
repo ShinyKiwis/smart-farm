@@ -28,6 +28,30 @@
     border:solid 2px var(--color-C8DCC6);
     border-radius: 15px;
 }
+
+
+/* .dashboard .DB {
+  display: grid;
+  grid-template-columns: repeat(2,0fr);
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 20px;
+}
+
+.dashboard .holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  padding: 20px;
+} */
+
+.holder h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+
 .dashboard .holder canvas{
     height:12.2em !important;
 }
