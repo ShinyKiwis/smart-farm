@@ -1,5 +1,4 @@
 import { createStore, Provider, useAtom } from "jotai";
-import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Lights from './components/Lights';
@@ -23,9 +22,9 @@ const myStore = createStore()
 function App() {
   const [auth] = useAtom(authAtom);
   if(!auth){
-    return <Login />
+    return <Login/>
   }
-  console.log("the fuck")
+ 
   return (
     <Provider store={myStore}>
     <div className="App">
@@ -45,7 +44,7 @@ function App() {
             <Route path="/password" element={<SetPassword />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/log" element={<HistoryLog />} />
-            <Route path="/login" element={<Dashboard />} />
+            {/* <Route path="/login" element={<Login />} /> */}
           </Routes>
         </MainContent>
       </BrowserRouter>

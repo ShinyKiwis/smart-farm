@@ -27,22 +27,23 @@ const LoginForm = () => {
   const [, setAuth] = useAtom(authAtom);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate()
   
   const handleAuthentication = async (e) => {
     e.preventDefault();
-    try {
-      const resp = await axios.get(
-        `http://localhost:5000/api/user/${username}/${password}`
-      );
-      if(resp.data.status){
-        setAuth({username})
-        navigate("/")
-      }else alert("User doesnt exists")
-    } catch (error) {
-      alert(error)
-      console.log(error)
-    }
+    setAuth({username})
+    // try {
+    //   const resp = await axios.get(
+    //     `http://localhost:5000/api/user/${username}/${password}`
+    //   );
+    //   if(resp.data){
+    //     console.log({resp})
+    //     setAuth({username})
+    //     window.location.pathname = "/"
+    //   }else alert("User doesnt exists")
+    // } catch (error) {
+    //   alert(error)
+    //   console.log(error)
+    // }
   };
   return (
     <div className="login-wrapper">
