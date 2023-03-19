@@ -1,6 +1,7 @@
 import { atom } from 'jotai'
 
 const deviceModalAtom = atom(null)
-const confirmModalAtom = atom(true)
+const confirmModalAtom = atom(null)
+const authAtom = atom(null)
 
-export {deviceModalAtom, confirmModalAtom}
+export {deviceModalAtom, confirmModalAtom, authAtom}
