@@ -8,9 +8,10 @@ const Avatar = () => {
   const inputRef = useRef(null);
 
 
-  const handleClick = () => {
+  const handleClick = event => {
     // 👇️ open file input box on click of another element
     inputRef.current.click();
+    event.preventDefault();
   };
 
   const handleFileChange = event => {
@@ -21,15 +22,15 @@ const Avatar = () => {
 
     console.log('fileObj is', fileObj);
 
-    // 👇️ reset file input
+    // reset file input
     event.target.value = null;
 
-    // 👇️ is now empty
+    // is now empty
     console.log(event.target.files);
-
-    // 👇️ can still access file object here
+    // can still access file object here
     console.log(fileObj);
     console.log(fileObj.name);
+    event.preventDefault();
   };
   return (
     <div className='setavatar'>
