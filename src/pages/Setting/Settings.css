@@ -8,15 +8,16 @@
     --color-ACACAC: #ACACAC;
     --color-383838: #383838;
 }
+
 .user hr{
     width:90%;
     color: var(--color-C8DCC6);
 }
 .user .setavatar{
-    display: block;
-    width:5em;
-    text-align: center;
-    
+    display: flex;
+    width:30%;
+    position: relative;
+    left: 33%;
 }
 .user .setavatar img{
     width:4em;
@@ -24,32 +25,17 @@
     margin-left:2em;
     border-radius: 50%;
 }
-.user .avaSetting{
-    display:flex;
-    gap: 4em;
-    justify-content: center;
-}
-.user .avaSetting button{
-    margin:.2em;
-    width: 8em;
-    height:2.5em;
-    border-radius: 10px; 
-    border:none;
-    font-weight: bold;
-    margin-top:1.5em;
-}
-.user .avaSetting button:hover{
-    background-color:  var(--color-ACACAC);
-    cursor: pointer;
-}
-.user .avaSetting .upload{
+.user .setavatar button{
+    font-family: 'Roboto Condensed';
     background-color: var(--color-C8DCC6);
-    color:white;
-}
-.user .avaSetting .upload:hover{
-    background-color: var(--color-72a16e);
-    color:white;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
     cursor: pointer;
+    margin-top: 1rem;
+    font-size:15px;
+    width:10em;
+    height:3em;
 }
 
 /*---Form---*/
@@ -80,11 +66,13 @@
 .user .form .submit button{
     margin:.2em;
     width: 8em;
-    height:2.5em;
+    height:3em;
     border-radius: 10px; 
     border:none;
+    font-size: 15px;
     font-weight: bold;
     margin-top:1.5em;
+    font-family: 'Roboto Condensed';
 }
 .user .form .submit .save{
     background-color: var(--color-C8DCC6);
