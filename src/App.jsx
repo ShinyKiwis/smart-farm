@@ -15,16 +15,24 @@ import SetPassword from './pages/Setting/SetPassword';
 import Setting from './pages/Setting/Setting';
 import User from './pages/Setting/User';
 import {authAtom} from "./store"
+import { useEffect } from "react";
 
 
 const myStore = createStore()
 
 function App() {
-  const [auth] = useAtom(authAtom);
+  const [auth, setAuth] = useAtom(authAtom);
+
+  useEffect(() => {
+    const user = window.localStorage.getItem("user")
+    if(user) setAuth(JSON.parse(user))
+    else setAuth(null)
+  },[])
+
   if(!auth){
     return <Login/>
   }
- 
+
   return (
     <Provider store={myStore}>
     <div className="App">

@@ -30,20 +30,21 @@ const LoginForm = () => {
   
   const handleAuthentication = async (e) => {
     e.preventDefault();
-    setAuth({username})
-    // try {
-    //   const resp = await axios.get(
-    //     `http://localhost:5000/api/user/${username}/${password}`
-    //   );
-    //   if(resp.data){
-    //     console.log({resp})
-    //     setAuth({username})
-    //     window.location.pathname = "/"
-    //   }else alert("User doesnt exists")
-    // } catch (error) {
-    //   alert(error)
-    //   console.log(error)
-    // }
+    // setAuth({username})
+    try {
+      const resp = await axios.get(
+        `http://localhost:5000/api/user/${username}/${password}`
+      );
+      if(resp.data.error || !resp.data.status) {
+        alert("Invalid credential!")
+        return
+      }
+      setAuth({username})
+      window.localStorage.setItem('user', JSON.stringify({username}))
+    } catch (error) {
+      alert(error)
+      console.log(error)
+    }
   };
   return (
     <div className="login-wrapper">
