@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useAtom } from 'jotai';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { confirmModalAtom, deviceModalAtom } from '../../store';
@@ -25,10 +25,9 @@ const LightItem = ({ onSwitch, light }) => {
     setConfirmModalAtomValue({onAccept: () =>  (category, id)})
   }
 
-  const navigate = useNavigate();
   return (
     <div className="lights__item">
-      <p onClick={() => navigate(`${light.id}`)}>{light.name}</p>
+      <p>{light.name}</p>
       <div className='lights__item__actions'>
         <div className="devices__table__actions">
           <span onClick={handleOpenUpdateModal}>
@@ -45,28 +44,21 @@ const LightItem = ({ onSwitch, light }) => {
 };
 
 const Lights = () => {
-  const [lights, setLights] = useState([
-    {
-      id: 1,
-      name: 'Light 1',
-      active: false,
-    },
-    {
-      id: 2,
-      name: 'Light 2',
-      active: true,
-    },
-    {
-      id: 3,
-      name: 'Light 3',
-      active: false,
-    },
-    {
-      id: 4,
-      name: 'Light 4',
-      active: true,
-    },
-  ]);
+  const [lights, setLights] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://localhost:5000/api/adafruit/light-toggle');
+      const data = await response.json();
+      setLights(data.map(light => ({
+        id: light.created_at,
+        name: light.id,
+        active: light.value,
+      })));
+    };
+
+    fetchData();
+  }, []);
 
   const handleToggleSwitch = (id) => {
     const tempLights = [...lights].map((light) => {
@@ -76,6 +68,7 @@ const Lights = () => {
     setLights(tempLights);
   };
 
+  const navigate = useNavigate();
   return (
     <div className="lights">
       {lights.map((light) => (

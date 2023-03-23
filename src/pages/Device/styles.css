@@ -78,6 +78,13 @@
     margin-right: 0.2rem;
 }
 
+.devices__table-container {
+    height: 550px; /* set a fixed height */
+    overflow: scroll; /* add a scrollbar */
+    overflow-x: hidden;
+  }
+  
+
 .devices__table{
     width: 100%;
     border-collapse: separate;
