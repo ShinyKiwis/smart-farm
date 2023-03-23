@@ -11,7 +11,9 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+import useWebSocket from 'react-use-websocket';
+import moment from 'moment';
+import faker from 'faker';
 
 ChartJS.register(
   CategoryScale,
@@ -36,7 +38,6 @@ const light = {
     },
   },
 };
-
 const temperature = {
   responsive: true,
   plugins: {
@@ -50,7 +51,6 @@ const temperature = {
     },
   },
 };
-
 const humidity = {
   responsive: true,
   plugins: {
@@ -64,7 +64,6 @@ const humidity = {
     },
   },
 };
-
 const moisture = {
   responsive: true,
   plugins: {
@@ -78,7 +77,6 @@ const moisture = {
     },
   },
 };
-
 const gdd = {
   responsive: true,
   plugins: {
@@ -116,42 +114,26 @@ const Dashboard = () => {
     gdd: data,
   });
 
-  const feedKeys = ['light', 'temperature', 'moisture', 'humidity', 'gdd'];
-
-  const socketUrl = 'ws://localhost:5000/api/adafruit';
-  const [socketData, setSocketData] = useState([]);
-
-  const { lastJsonMessage, readyState } = useWebSocket(socketUrl);
+  const { lastJsonMessage } = useWebSocket('wss://smart-farm-be.onrender.com');
 
   useEffect(() => {
     if (lastJsonMessage) {
-      const newData = lastJsonMessage.filter((item) => feedKeys.includes(item.feed_key));
-
-      const chartDataUpdates = newData.reduce((acc, item) => {
-        const key = item.feed_key;
-        const labels = [
-          ...chartData[key].labels.slice(-29),
-          moment(item.created_at).format('HH:mm:ss').toString(),
-        ];
-
-        acc[key] = {
+      console.log(lastJsonMessage);
+      const { feed_key, value, created_at } = lastJsonMessage;
+      const chartDataUpdates = {
+        ...chartData,
+        [feed_key]: {
           ...data,
-          labels,
+          labels: [...chartData[feed_key].labels, moment(created_at).format('HH:mm:ss')],
           datasets: [
             {
               ...data.datasets[0],
-              data: [...chartData[key].datasets[0].data.slice(-29), item.value],
+              data: [...chartData[feed_key].datasets[0].data, value],
             },
           ],
-        };
-
-        return acc;
-      }, {});
-
-      setChartData((prevState) => ({
-        ...prevState,
-        ...chartDataUpdates,
-      }));
+        },
+      };
+      setChartData(chartDataUpdates);
     }
   }, [lastJsonMessage]);
 
