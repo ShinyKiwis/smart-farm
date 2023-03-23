@@ -31,7 +31,7 @@
   };
 
   const Avatar = () => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "";
     return (
       <div className='avatar'>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjYmlp9JDeNMaFZzw9S3G1dVztGqF_2vq9nA&usqp=CAU" />
