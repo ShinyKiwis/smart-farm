@@ -118,7 +118,7 @@ const Dashboard = () => {
 
   const feedKeys = ['light', 'temperature', 'moisture', 'humidity', 'gdd'];
 
-  const socketUrl = 'ws://localhost:5000/api/adafruit/realtime';
+  const socketUrl = 'ws://localhost:5000/api/adafruit';
   const [socketData, setSocketData] = useState([]);
 
   const { lastJsonMessage, readyState } = useWebSocket(socketUrl);
