@@ -16,10 +16,22 @@
   import SwitchControl from '../../components/SwitchControl';
   import { confirmModalAtom, deviceModalAtom } from '../../store';
   import './styles.css';
+import axios from 'axios';
 
   const AllDevices = () => {
-    const [devices, setDevices] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [devices, setDevices] = useState([
+      {
+        id: 2464107,
+        name: "Light 1",
+        active: false
+      },
+      {
+        id: 2464109,
+        name: "Water pump 1",
+        active: false
+      }
+    ]);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const navigateToDetailPage = (category, id) =>
@@ -51,38 +63,17 @@
       setConfirmModalAtomValue({ onAccept: () => handleDeleteDevice(category, id) });
     };
 
-    useEffect(() => {
-      const fetchDevices = async () => {
-        const feedkeys = ['light-toggle', 'water-pump-toggle'];
-        const result = await Promise.all(
-          feedkeys.map(async (feedkey) => {
-            const response = await fetch(
-              `http://localhost:5000/api/adafruit/${feedkey}`
-            );
-            const data = await response.json();
-            return data;
-          })
-        );
-        const devicesData = result
-          .flat()
-          .map((device) => ({
-            id: device.id,
-            name: device.id,
-            category: device.feed_key === 'light-toggle' ? 'Light' : 'Water Pump',
-            active: device.value,
-          }));
-        setDevices(devicesData);
-        setLoading(false);
-      };
-      fetchDevices();
-    }, []);
-
-    const handleToggleSwitch = (id) => {
-      const tempDevices = [...devices].map((device) => {
-        if (device.id === id) return { ...device, active: !device.active };
-        return device;
-      });
-      setDevices(tempDevices);
+    const handleToggleSwitch = async (id) => {
+      try {
+        const res = await axios.post(`http://localhost:5000/api/adafruit/light-toggle/${id}`)
+        const tempDevices = [...devices].map((device) => {
+          if (device.id === id) return { ...device, active: !device.active };
+          return device;
+        });
+        setDevices(tempDevices);
+      } catch (error) {
+        console.log({error})
+      }
     };
 
     return (

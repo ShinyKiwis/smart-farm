@@ -54,7 +54,6 @@ const Lights = () => {
   const handleToggleSwitch = async (id) => {
     try {
       const res = await axios.post(`http://localhost:5000/api/adafruit/light-toggle/${id}`)
-      console.log({res})
       const tempLights = [...lights].map((light) => {
         if (light.id === id) return { ...light, active: !light.active };
         return light;

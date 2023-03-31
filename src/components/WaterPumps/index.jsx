@@ -55,7 +55,6 @@ const WaterPumps = () => {
       const res = await axios.post(
         `http://localhost:5000/api/adafruit/light-toggle/${id}`
       );
-      console.log({ res });
       const tempWaterPumps = [...waterpumps].map((waterpump) => {
         if (waterpump.id === id)
           return { ...waterpump, active: !waterpump.active };
