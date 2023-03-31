@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { confirmModalAtom, deviceModalAtom } from '../../store';
 import SwitchControl from '../SwitchControl';
 import './styles.css';
+import axios from 'axios';
 
 const LightItem = ({ onSwitch, light }) => {
   const [, setDeviceModalAtomValue] =
@@ -44,31 +45,27 @@ const LightItem = ({ onSwitch, light }) => {
 };
 
 const Lights = () => {
-  const [lights, setLights] = useState([]);
+  const [lights, setLights] = useState([{
+    id: 2464107,
+    name: "Light 1",
+    active: false
+  }]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/api/adafruit/light-toggle');
-      const data = await response.json();
-      setLights(data.map(light => ({
-        id: light.created_at,
-        name: light.id,
-        active: light.value,
-      })));
-    };
-
-    fetchData();
-  }, []);
-
-  const handleToggleSwitch = (id) => {
-    const tempLights = [...lights].map((light) => {
-      if (light.id === id) return { ...light, active: !light.active };
-      return light;
-    });
-    setLights(tempLights);
+  const handleToggleSwitch = async (id) => {
+    try {
+      const res = await axios.post(`http://localhost:5000/api/adafruit/light-toggle/${id}`)
+      console.log({res})
+      const tempLights = [...lights].map((light) => {
+        if (light.id === id) return { ...light, active: !light.active };
+        return light;
+      });
+  
+      setLights(tempLights);
+    } catch (error) {
+      console.log({error})
+    }
   };
-
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className="lights">
       {lights.map((light) => (
