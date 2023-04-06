@@ -16,6 +16,7 @@ import Setting from './pages/Setting/Setting';
 import User from './pages/Setting/User';
 import {authAtom} from "./store"
 import { useEffect } from "react";
+import Thresholds from "./pages/Setting/Thresholds";
 
 
 const myStore = createStore()
@@ -50,6 +51,8 @@ function App() {
             <Route path="/devices/water-pumps/:id" element={<DeviceDetail />} />
             <Route path="/user" element={<User />} />
             <Route path="/password" element={<SetPassword />} />
+            <Route path="/setting/thresholds" element={<Thresholds/>} />
+            
             <Route path="/setting" element={<Setting />} />
             <Route path="/log" element={<HistoryLog />} />
             {/* <Route path="/login" element={<Login />} /> */}

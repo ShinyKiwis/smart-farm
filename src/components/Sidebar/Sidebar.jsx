@@ -11,13 +11,14 @@
     MdDashboard,
     MdIntegrationInstructions,
     MdLightbulb,
-    MdWaterDrop
+    MdWaterDrop,
   } from "react-icons/md"
   import {
     FaHistory,
     FaUser,
     FaLock
   } from "react-icons/fa"
+  import {RiIncreaseDecreaseFill} from 'react-icons/ri'
 
 
 
@@ -43,12 +44,13 @@
     )
   }
 
-  const SideBarItem = ({ Item, page, href }) => {
+  const SideBarItem = ({ Item, page, href , hidden}) => {
     const location = useLocation();
 
     // Check if the current path matches the `href` prop
     const isActive = location.pathname === href;
-
+    if(hidden==='false')
+    return(<></>)
     return (
       <>
         <Link className="sidebar_link" to={href}>
@@ -62,7 +64,7 @@
       </>
     );
   };
-  const SubSideBarItem = ({ Item, page,onHover, href, SubItem1, Subpage1, Subhref1, SubItem2, Subpage2, Subhref2 }) => {
+  const SubSideBarItem = ({ Item, page,onHover, href, SubItem1, Subpage1, Subhref1, SubItem2, Subpage2, Subhref2, SubItem3, Subpage3, Subhref3, hidden}) => {
     const location = useLocation();
 
     // Check if the current path matches the `href` prop
@@ -78,8 +80,9 @@
           </div>
         </Link>
         <div className='devices_popout' /*style={onHover ? { display: "block" } : { display: "none" }}*/>
-          <SideBarItem Item={SubItem1} page={Subpage1} href={Subhref1} />
-          <SideBarItem Item={SubItem2} page={Subpage2} href={Subhref2} />
+          <SideBarItem Item={SubItem1} page={Subpage1} href={Subhref1} hidden="true"/>
+          <SideBarItem Item={SubItem2} page={Subpage2} href={Subhref2} hidden="true"/>
+          <SideBarItem Item={SubItem3} page={Subpage3} href={Subhref3} hidden={hidden}/>
         </div>
       </>
     );
@@ -109,6 +112,7 @@
               <SubSideBarItem Item={MdIntegrationInstructions} page="Devices" href="/devices" onHover={onHover} id="device"
                               SubItem1={MdLightbulb} Subpage1="Light" Subhref1="/devices/lights"
                               SubItem2={MdWaterDrop} Subpage2="Water Pump" Subhref2="/devices/water-pumps"
+                              SubItem3={MdWaterDrop} Subpage3="Water Pump" Subhref3="/devices/water-pumps" hidden = "false"
                               />
               </div>
               <SideBarItem Item={FaHistory} page="History Logs" href="/log" id="log"/>
@@ -116,6 +120,7 @@
               <SubSideBarItem Item={AiFillSetting} page="Setting" href="/setting" onHover={onHover2} id="setting"
                               SubItem1={FaUser} Subpage1="Personal Infomation" Subhref1="/user"
                               SubItem2={FaLock} Subpage2="Password" Subhref2="/password"
+                              SubItem3={RiIncreaseDecreaseFill} Subpage3="Thresholds" Subhref3="/setting/thresholds" hidden="true"
                               />
               </div>
             </div>

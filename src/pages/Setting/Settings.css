@@ -57,11 +57,12 @@
     width:20em;
     border-radius: 5px;
     border: solid 1px var(--color-383838);
+    margin:0 1em;
 }
 .user .form .submit{
     display:flex;
     justify-content: right;
-    margin-right:16em;
+    margin-right:19.5em;
 }
 .user .form .submit button{
     margin:.2em;
@@ -130,4 +131,18 @@
 .setting button:hover{
     background-color: var(--color-9bc898);
     cursor: pointer;
+}
+
+.minmax{
+    display: flex;
+    gap:5.5em;
+    justify-content: center;
+    margin-left:-1em;
+}
+.minmax h3{
+    margin:0;
+    font-size: 20px;
+}
+.input #thresholds{
+    width: 8.5em;
 }

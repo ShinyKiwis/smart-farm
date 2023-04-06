@@ -55,7 +55,7 @@ const InputArea = ({type,label,name, placeholder}) =>{
 const User = () => {
   return (
     <div className='user padding-wrapper'>
-      <h1 className="page-title">Settings</h1>
+      <h1 className="page-title">Users</h1>
       <form className='form'>
         <Avatar />
         <hr></hr>
