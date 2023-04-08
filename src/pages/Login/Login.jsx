@@ -78,7 +78,7 @@ const LoginForm = () => {
           <input id="checkbox" type="checkbox" name="remember" /> Remember me ?
         </div>
         <div className="form-button">
-          <button>LOGIN</button>
+          <button onClick={handleAuthentication}>LOGIN</button>
         </div>
         <h4>
           <i>Forgot your password ?</i>
