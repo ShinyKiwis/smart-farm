@@ -1,42 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaSearch, FaFilter } from 'react-icons/fa';
-import './styles.css';
+import { useEffect } from 'react';
+import axios from 'axios';
+import moment from 'moment';
+import "./styles.css"
 
 const HistoryLog = () => {
-  const logs = [
-    {
-      id: 1,
-      date: '10-03-23',
-      time: '09:00:52',
-      category: 'Light',
-      device: 'Light 1',
-      event: 'Turned on',
-    },
-    {
-      id: 2,
-      date: '10-03-23',
-      time: '09:00:52',
-      category: 'Light',
-      device: 'Light 1',
-      event: 'Turned on',
-    },
-    {
-      id: 3,
-      date: '10-03-23',
-      time: '09:00:52',
-      category: 'Lightsaduasytdjhkastdhjkasgdhjagsdhjgsadjhsagdjhsgadhj',
-      device: 'Light 1',
-      event: 'Turned on',
-    },
-    {
-      id: 4,
-      date: '10-03-23',
-      time: '09:00:52',
-      category: 'Water Pump',
-      device: 'Water Pump 1',
-      event: 'Turned asdkjhasjkdhaasdsadsadsdsadasdsdskjdghjkasdghjasdghjasgdhjasgdhjasgdjhsagdhjg',
-    },
-  ];
+  const [logs, setLogs] = useState([]);
+  const[isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchHistoryLog = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/logger');
+        setLogs(res.data.reverse());
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
+    };
+
+    const interval = setInterval(() => {
+      fetchHistoryLog();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="devices padding-wrapper">
@@ -62,20 +50,36 @@ const HistoryLog = () => {
             <th>Date</th>
             <th>Time</th>
             <th>Category</th>
-            <th>Device</th>
-            <th>Event</th>
+            <th>Type</th>
+            <th>Content</th>
           </tr>
         </thead>
         <tbody>
-          {logs.map((log) => (
-            <tr key={log.id}>
-              <td style={{width: '12%'}}>{log.date}</td>
-              <td style={{width: '12%'}}>{log.time}</td>
-              <td style={{width: '15%'}}>{log.category}</td>
-              <td style={{width: '20%'}}>{log.device}</td>
-              <td style={{width: '40%'}}>{log.event}</td>
-            </tr>
-          ))}
+          {isLoading && <p style={{ textAlign: 'center' }}>Loading...</p>}
+          {!isLoading && logs &&
+            logs.map((log) => (
+              <tr key={log.id}>
+                <td style={{ width: '12%' }}>
+                  {moment(log.time).format('HH:MM')}
+                </td>
+                <td style={{ width: '12%' }}>
+                  {moment(log.time).format('DD/MM/YYYY')}
+                </td>
+                <td style={{ width: '15%', textTransform: 'capitalize' }}>
+                  {log.feed_key}
+                </td>
+                <td
+                  style={{
+                    width: '20%',
+                    color: log.type === '[EVENT]' ? '#C8DCC6' : 'red',
+                    fontWeight: '600',
+                  }}
+                >
+                  {log.type}
+                </td>
+                <td style={{ width: '40%' }}>{log.content}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
