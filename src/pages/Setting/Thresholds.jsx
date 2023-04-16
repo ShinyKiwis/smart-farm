@@ -1,12 +1,7 @@
 import React from 'react'
 import "./Settings.css"
 import {useState} from 'react';
-
-
-
-
-
-
+import axios from 'axios';
 
 const Thresholds = () => {
   
@@ -19,8 +14,6 @@ const Thresholds = () => {
     setTempMax(e.target.value);
   };
 
-
-
   const [MoisMin, setMoisMin] = useState(0);
   const [MoisMax, setMoisMax] = useState(0);
   const onMoisMinChange = (e) => {
@@ -29,9 +22,6 @@ const Thresholds = () => {
   const onMoisMaxChange = (e) => {
     setMoisMax(e.target.value);
   };
-
-
-
 
   const [HumidMin, setHumidMin] = useState(0);
   const [HumidMax, setHumidMax] = useState(0);
@@ -42,9 +32,6 @@ const Thresholds = () => {
     setHumidMax(e.target.value);
   };
 
-
-
-
   const [GDDMin, setGDDMin] = useState(0);
   const [GDDMax, setGDDMax] = useState(0);
   const onGDDMinChange = (e) => {
@@ -53,6 +40,23 @@ const Thresholds = () => {
   const onGDDMaxChange = (e) => {
     setGDDMax(e.target.value);
   };
+
+
+  const Onsubmitbtn = async (e) => {
+    e.preventDefault();
+    try {
+      const responseTemp = await axios.post(`http://localhost:5000/api/adafruit/Temp/${TempMin}/${TempMax}`);
+      console.log(responseTemp);
+      const responseMois = await axios.post(`http://localhost:5000/api/adafruit/Mois/${MoisMin}/${MoisMax}`);
+      console.log(responseMois);
+      const responseHumid = await axios.post(`http://localhost:5000/api/adafruit/Humid/${HumidMin}/${HumidMax}`);
+      console.log(responseHumid);
+      const responseGDD = await axios.post(`http://localhost:5000/api/adafruit/GDD/${GDDMin}/${GDDMax}`);
+      console.log(responseGDD);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className='user padding-wrapper'>
@@ -126,12 +130,11 @@ const Thresholds = () => {
         <hr></hr>
 
         <div className='submit'>
-          <button type="submit" name="submit" className='save'>Save
-          </button>
+          <button onClick={Onsubmitbtn} name="submit" className='save'>Save</button>
         </div>
       </form>
     </div>
   )
 }
 
-export default Thresholds
+export default Thresholds;
