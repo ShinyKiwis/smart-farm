@@ -162,7 +162,8 @@ const Dashboard = () => {
               datasets: [
                 {
                   data: [...prevState.light.datasets[0].data, newData.y],
-                  ...prevState.light.datasets,
+                  borderColor: '#C8DCC6',
+                  backgroundColor: '#58c750',
                 },
               ],
             },
@@ -180,8 +181,8 @@ const Dashboard = () => {
                     ...prevState.temperature.datasets[0].data,
                     newData.y,
                   ],
-                  ...prevState.temperature.datasets,
-                },
+                  borderColor: '#C8DCC6',
+                  backgroundColor: '#58c750',                },
               ],
             },
           }));
@@ -195,8 +196,8 @@ const Dashboard = () => {
               datasets: [
                 {
                   data: [...prevState.moisture.datasets[0].data, newData.y],
-                  ...prevState.moisture.datasets,
-                },
+                  borderColor: '#C8DCC6',
+                  backgroundColor: '#58c750',                },
               ],
             },
           }));
@@ -210,8 +211,8 @@ const Dashboard = () => {
               datasets: [
                 {
                   data: [...prevState.humidity.datasets[0].data, newData.y],
-                  ...prevState.humidity.datasets,
-                },
+                  borderColor: '#C8DCC6',
+                  backgroundColor: '#58c750',                },
               ],
             },
           }));
@@ -225,8 +226,8 @@ const Dashboard = () => {
               datasets: [
                 {
                   data: [...prevState.gdd.datasets[0].data, newData.y],
-                  ...prevState.gdd.datasets,
-                },
+                  borderColor: '#C8DCC6',
+                  backgroundColor: '#58c750',                },
               ],
             },
           }));
