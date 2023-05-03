@@ -54,4 +54,33 @@
 
 .dashboard .holder canvas{
     height:12.2em !important;
+    width:23em !important;
 }
+
+
+.dashboard .holder .stats{
+  width:40%;
+  height:12.2em;
+}
+.dashboard .holder .stats .value{
+  width:70%;
+  height:25%;
+  background-color: var(--color-C8DCC6);
+  border-radius: 10px;
+  padding:0.2em 0.5em;
+  margin-top:.5em;
+  margin-left: .5em;
+}
+.dashboard .holder .stats .value h3{
+  margin:0;
+  font-size: 23px;
+  width:80%;
+  margin:0%;
+}
+.dashboard .holder .stats .value h5{
+  margin:0;
+  margin-top:0em;
+  font-size: 15px;
+}
+
+

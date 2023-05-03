@@ -113,34 +113,90 @@ const Dashboard = () => {
     humidity: data,
     gdd: data,
   });
+  const [max, setMax] = useState({
+    light: 0,
+    temperature: 0,
+    moisture: 0,
+    humidity: 0,
+    gdd: 0
+  });
+  const [min, setMin] = useState({
+    light: 0,
+    temperature: 0,
+    moisture: 0,
+    humidity: 0,
+    gdd: 0
+  });
+  const [avg, setAvg] = useState({
+    light: 0,
+    temperature: 0,
+    moisture: 0,
+    humidity: 0,
+    gdd: 0
+  });
+  const [length, setlength] = useState({
+    light: 0,
+    temperature: 0,
+    moisture: 0,
+    humidity: 0,
+    gdd: 0
+  });
 
   useEffect(() => {
-        const fetchChartData = async () => {
-          try {
-            const feedKeys = ['light', 'temperature', 'moisture', 'humidity', 'gdd'];
-            const dataRequests = feedKeys.map((key) => axios.get(`http://localhost:5000/api/adafruit/${key}`));
-            const responses = await Promise.all(dataRequests);
-            const chartDataUpdates = responses.reduce((acc, { data: responseData }, index) => {
-              const labels = responseData.filter((feed, index) => index % 5 === 0).reverse().map((feed) => feed.created_at.substring(11,19));
-              acc[feedKeys[index]] = {
-                ...data,
-                labels,
-                datasets: [
-                  {
-                    ...data.datasets[0],
-                    data: responseData.filter((feed, index) => index % 5 === 0).reverse().map((feed) => feed.value),
-                  },
-                ],
-              };
-              return acc;
-            }, {});
-            setChartData(chartDataUpdates);
-          } catch (error) {
-            console.error(error);
-          }
-        };
-        fetchChartData();
-      }, []);
+    const fetchChartData = async () => {
+      try {
+        const feedKeys = ['light', 'temperature', 'moisture', 'humidity', 'gdd'];
+        const dataRequests = feedKeys.map((key) => axios.get(`http://localhost:5000/api/adafruit/feed/${key}`));
+        const responses = await Promise.all(dataRequests);
+        const chartDataUpdates = responses.reduce((acc, { data: responseData }, index) => {
+          const values = responseData.map((feed) => feed.value);
+          const filteredValues = values.map(str => parseInt(str, 10));
+          const maxVal = (filteredValues !== "-Infinity") ? Math.max(...filteredValues).toFixed(2) : 0;
+          const minVal = Math.min(...filteredValues).toFixed(2);
+          const avgVal = (filteredValues.reduce((total, val) => total + val, 0)/filteredValues.length).toFixed(2);
+          const length = filteredValues.length;
+          // console.log(maxVal)
+          // console.log(minVal)
+          // console.log(avgVal)
+          const labels = responseData.filter((feed, index) => index % 5 === 0).reverse().map((feed) => feed.created_at.substring(11,19));
+          acc[feedKeys[index]] = {
+            ...data,
+            labels,
+            datasets: [
+              {
+                ...data.datasets[0],
+                data: responseData.filter((feed, index) => index % 5 === 0).reverse().map((feed) => (feed.value !== null && feed.value == "null" && feed.value == "Infinity" && feed.value == "-Infinity") ?  '0' : feed.value),
+              },
+            ],
+          };
+          setMax(prevMax => ({
+            ...prevMax,
+            [feedKeys[index]]: maxVal
+          }));
+          setMin(prevMin => ({
+            ...prevMin,
+            [feedKeys[index]]: minVal
+          }));
+          setAvg(prevAvg => ({
+            ...prevAvg,
+            [feedKeys[index]]: avgVal
+          }));
+          setlength(prevAvg => ({
+            ...prevAvg,
+            [feedKeys[index]]: length
+          }));
+          console.log(max.light)
+          console.log(min.light)
+          console.log(avg.light)
+          return acc;
+        }, {});
+        setChartData(chartDataUpdates);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchChartData();
+  }, []);
 
 
   const { lastJsonMessage } = useWebSocket('ws://localhost:5000');
@@ -168,6 +224,9 @@ const Dashboard = () => {
               ],
             },
           }));
+          setMax(prevMax => (newData.y > prevMax.light ? { ...prevMax, light: newData.y } : prevMax));
+          setMin(prevMin => (newData.y < prevMin.light ? { ...prevMin, light: newData.y } : prevMin));
+          setAvg(prevAvg => ({ ...prevAvg, light: (((prevAvg.light * length.light) + newData.y) / (length.light + 1)).toFixed(2) }));
           break;
         case 'temperature':
           setChartData((prevState) => ({
@@ -186,6 +245,9 @@ const Dashboard = () => {
               ],
             },
           }));
+          setMax(prevMax => (newData.y > prevMax.temperature ? { ...prevMax, temperature: newData.y } : prevMax));
+          setMin(prevMin => (newData.y < prevMin.temperature ? { ...prevMin, temperature: newData.y } : prevMin));
+          setAvg(prevAvg => ({ ...prevAvg, temperature: (((prevAvg.temperature * length.temperature) + newData.y) / (length.temperature + 1)).toFixed(2) }));
           break;
         case 'moisture':
           setChartData((prevState) => ({
@@ -201,6 +263,9 @@ const Dashboard = () => {
               ],
             },
           }));
+          setMax(prevMax => (newData.y > prevMax.moisture ? { ...prevMax, moisture: newData.y } : prevMax));
+          setMin(prevMin => (newData.y < prevMin.moisture ? { ...prevMin, moisture: newData.y } : prevMin));
+          setAvg(prevAvg => ({ ...prevAvg, moisture: (((prevAvg.moisture * length.moisture) + newData.y) / (length.moisture + 1)).toFixed(2) }));
           break;
         case 'humidity':
           setChartData((prevState) => ({
@@ -216,6 +281,9 @@ const Dashboard = () => {
               ],
             },
           }));
+          setMax(prevMax => (newData.y > prevMax.humidity ? { ...prevMax, humidity: newData.y } : prevMax));
+          setMin(prevMin => (newData.y < prevMin.humidity ? { ...prevMin, humidity: newData.y } : prevMin));
+          setAvg(prevAvg => ({ ...prevAvg, humidity: (((prevAvg.humidity * length.humidity) + newData.y) / (length.humidity + 1)).toFixed(2) }));
           break;
         case 'gdd':
           setChartData((prevState) => ({
@@ -231,10 +299,17 @@ const Dashboard = () => {
               ],
             },
           }));
+          setMax(prevMax => (newData.y > prevMax.gdd ? { ...prevMax, gdd: newData.y } : prevMax));
+          setMin(prevMin => (newData.y < prevMin.gdd ? { ...prevMin, gdd: newData.y } : prevMin));
+          (avg.gdd) ?
+          setAvg(prevAvg => (
+            { ...prevAvg, gdd: (((prevAvg.gdd * length.gdd) + newData.y) / (length.gdd + 1)).toFixed(2) }
+            )) : 0;
           break;
       }
     }
   }, [lastJsonMessage]);
+
 
   return (
     <div className='dashboard padding-wrapper'>
@@ -242,22 +317,92 @@ const Dashboard = () => {
       <div className='DB'>
         <div className='row'>
           <div className='holder'>
+            <div className='stats'>
+              <div className='value'>
+                <h5>Max value:</h5>
+                <h3>{max.light}</h3>
+              </div>
+              <div className='value'>
+                <h5>Min value:</h5>
+                <h3>{min.light}</h3>
+              </div>
+              <div className='value'>
+                <h5>Avg value:</h5>
+                <h3>{avg.light}</h3>
+              </div>
+            </div>
             <Line options={light} data={chartData.light} />
           </div>
           <div className='holder'>
+            <div className='stats'>
+              <div className='value'>
+                <h5>Max value:</h5>
+                <h3>{max.temperature}</h3>
+              </div>
+              <div className='value'>
+                <h5>Min value:</h5>
+                <h3>{min.temperature}</h3>
+              </div>
+              <div className='value'>
+                <h5>Avg value:</h5>
+                <h3>{avg.temperature}</h3>
+              </div>
+            </div>
             <Line options={temperature} data={chartData.temperature} />
           </div>
         </div>
         <div className='row'>
           <div className='holder'>
+            <div className='stats'>
+              <div className='value'>
+                <h5>Max value:</h5>
+                <h3>{max.moisture}</h3>
+              </div>
+              <div className='value'>
+                <h5>Min value:</h5>
+                <h3>{min.moisture}</h3>
+              </div>
+              <div className='value'>
+                <h5>Avg value:</h5>
+                <h3>{avg.moisture}</h3>
+              </div>
+            </div>
             <Line options={moisture} data={chartData.moisture} />
           </div>
           <div className='holder'>
+            <div className='stats'>
+              <div className='value'>
+                <h5>Max value:</h5>
+                <h3>{max.humidity}</h3>
+              </div>
+              <div className='value'>
+                <h5>Min value:</h5>
+                <h3>{min.humidity}</h3>
+              </div>
+              <div className='value'>
+                <h5>Avg value:</h5>
+                <h3>{avg.humidity}</h3>
+              </div>
+            </div>
             <Line options={humidity} data={chartData.humidity} />
           </div>
         </div>
         <div className='row'>
           <div className='holder'>
+            <div className='stats'>
+              <div className='value'>
+                <h5>Max value:</h5>
+                <h3>{max.gdd}</h3>
+              </div>
+              <div className='value'>
+                <h5>Min value:</h5>
+                <h3>{min.gdd}</h3>
+              </div>
+              <div className='value'>
+                <h5>Avg value:</h5>
+                <h3>{avg.gdd}</h3>
+              </div>
+            </div>
             <Line options={gdd} data={chartData.gdd} />
           </div>
         </div>

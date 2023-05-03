@@ -108,7 +108,8 @@ body{
     align-items: center;
     cursor: pointer;
     width:70%;
-    padding: .8em 1em;
+    padding: 0.8em 1em;
+    margin:.2em 0;
 }
 .sidebar_item:hover, .sub_sidebar_item:hover {
     background-color: var(--color-C8DCC6);
