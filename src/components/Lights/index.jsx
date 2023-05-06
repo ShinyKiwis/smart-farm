@@ -5,12 +5,13 @@ import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { confirmModalAtom, deviceModalAtom } from '../../store';
+import { confirmModalAtom, deviceModalAtom, lightsAtom } from '../../store';
 import SwitchControl from '../SwitchControl';
 import './styles.css';
 import axios from 'axios';
 
 const LightItem = ({ onSwitch, light }) => {
+  const navigate = useNavigate()
   const [, setDeviceModalAtomValue] =
     useAtom(deviceModalAtom);
   const handleOpenUpdateModal = () =>
@@ -26,9 +27,12 @@ const LightItem = ({ onSwitch, light }) => {
     setConfirmModalAtomValue({onAccept: () =>  (category, id)})
   }
 
+  const navigateToDetailPage = () =>
+      navigate(`/devices/lights/${light.id}`);
+
   return (
     <div className="lights__item">
-      <p>{light.name}</p>
+      <p onClick={navigateToDetailPage}>{light.name}</p>
       <div className='lights__item__actions'>
         <div className="devices__table__actions">
           <span onClick={handleOpenUpdateModal}>
@@ -45,15 +49,12 @@ const LightItem = ({ onSwitch, light }) => {
 };
 
 const Lights = () => {
-  const [lights, setLights] = useState([{
-    id: 2464107,
-    name: "Light 1",
-    active: false
-  }]);
+  const [lights, setLights] = useAtom(lightsAtom)
 
   const handleToggleSwitch = async (id) => {
+    const device = lights.find(item => item.id === id)
     try {
-      const res = await axios.post(`http://localhost:5000/api/adafruit/light-toggle/${id}`)
+      const res = await axios.post(`http://localhost:5000/api/adafruit/feed/${id}/${!device.active}`)
       const tempLights = [...lights].map((light) => {
         if (light.id === id) return { ...light, active: !light.active };
         return light;

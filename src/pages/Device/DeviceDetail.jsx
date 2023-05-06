@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { useLocation, useParams } from 'react-router-dom';
 import ScheduleDetail from '../../components/ScheduleDetail';
 import SwitchControl from '../../components/SwitchControl';
 import "./styles.css"
+import { useAtom } from 'jotai';
+import { lightsAtom, waterPumpsAtom } from '../../store';
+import axios from 'axios';
 
 const devices = {
   lights: [
@@ -55,31 +58,75 @@ const devices = {
 const DeviceDetail = () => {
   const location = useLocation();
   const { id } = useParams();
-  const [data, setData] = useState();
+  const [lights,setLights] = useAtom(lightsAtom)
+  const [waterPumps,setWaterPumps] = useAtom(waterPumpsAtom)
+  const [schedule, setSchedule] = useState([])
+
+  const data = useMemo(() => {
+    if(location.pathname.includes('lights')){
+      return lights.find(item => item.id === parseInt(id))
+    }
+    return waterPumps.find((item) => item.id === parseInt(id))
+  },[lights, waterPumps,id, location])
+
+  console.log({data})
+
   const [scheduleSelect, setScheduleSelect] = useState(null)
 
-  useEffect(() => {
-    const getData = () => {
-      if (location.pathname.includes('lights')) {
-        const light = devices.lights.find((item) => item.id === parseInt(id));
-        setData(light);
-        return;
-      }
-      const waterPump = devices.waterPumps.find((item) => item.id === parseInt(id));
-      setData(waterPump);
-    };
-    getData()
-  }, [id,location]);
-
-  const handleSaveSchedule = () => {
-    setScheduleSelect(null)
+  const handleSaveSchedule = async (value) => {
+    try {
+      await axios.post(`http://localhost:5000/api/adafruit/schedule/${data.type}/${value.timeStart}/${value.timeEnd}/${value.repeats}`, {
+        _id: value.id
+      })
+    } catch (error) {
+      console.log({error})
+    }
+    window.location.reload()
   }
-  
+
+  const handleToggleSwitch = async (id) => {
+    try {
+      const res = await axios.post(`http://localhost:5000/api/adafruit/feed/${data.id}/${!data.active}`)
+      if(data.type === "light"){
+        const tempLights = [...lights].map((light) => {
+          if (light.id === id) return { ...light, active: !light.active };
+          return light;
+        });
+        console.log({tempLights})
+        setLights(tempLights);
+      }
+      else{
+        const tempWaterPumps = [...waterPumps].map((waterpump) => {
+          if (waterpump.id === id)
+            return { ...waterpump, active: !waterpump.active };
+          return waterpump;
+        });
+        setWaterPumps(tempWaterPumps);
+      }
+      // setData(prev => ({...prev, active: !data.active}))
+    } catch (error) {
+      console.log({error})
+    }
+  };
+
+  useEffect(() => {
+    const getSchedule = async (feedKey) => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/adafruit/schedule/${feedKey}`)
+        if(res && res.data) setSchedule(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    if(data){
+      getSchedule(data.type)
+    }
+  }, [data])
   return (
     <div className="device-detail padding-wrapper">
       <div className='device-detail__header'>
         <h1 className="page-title">{data?.name}</h1>
-        <SwitchControl active={data?.active || false} onSwitch={() =>{}}/>
+        <SwitchControl active={data?.active || false} onSwitch={() => handleToggleSwitch(data.id)}/>
       </div>
       <div className='device-detail__field'>
         <input placeholder={data?.name}/>
@@ -87,12 +134,12 @@ const DeviceDetail = () => {
       </div>
 
       <div className='device-detail__schedule'>
-        <div className='device-detail__schedule__add'>
+        <div className='device-detail__schedule__add' onClick={() => setScheduleSelect({})}>
           <FaPlus/>
         </div>
-        {data && data.schedule.map((item,i) => (
+        {schedule && schedule.length > 0 && schedule.map((item,i) => (
           <div key={i} className='device-detail__schedule__item'>
-            <p onClick={() => setScheduleSelect(item)}> {item.time}</p>
+            <p onClick={() => setScheduleSelect(item)}> {item.timeStart}-{item.timeEnd}</p>
             <SwitchControl active={item.active} />
           </div>
         ))}

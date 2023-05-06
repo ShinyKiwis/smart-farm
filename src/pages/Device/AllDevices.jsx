@@ -2,7 +2,7 @@
   /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
   /* eslint-disable jsx-a11y/click-events-have-key-events */
   import { useAtom } from 'jotai';
-  import React, { useEffect, useState } from 'react';
+  import React, { useEffect, useMemo, useState } from 'react';
   import {
     FaSearch,
     FaFilter,
@@ -14,23 +14,18 @@
   import ConfirmModal from '../../components/Modals/ConfirmModal';
   import DeviceModal from '../../components/Modals/DeviceModal';
   import SwitchControl from '../../components/SwitchControl';
-  import { confirmModalAtom, deviceModalAtom } from '../../store';
+  import { confirmModalAtom, deviceModalAtom, lightsAtom, waterPumpsAtom } from '../../store';
   import './styles.css';
 import axios from 'axios';
 
   const AllDevices = () => {
-    const [devices, setDevices] = useState([
-      {
-        id: 2464107,
-        name: "Light 1",
-        active: false
-      },
-      {
-        id: 2464109,
-        name: "Water pump 1",
-        active: false
-      }
-    ]);
+    const [lights, setLights] = useAtom(lightsAtom)
+    const [waterPumps, setWaterPumps] = useAtom(waterPumpsAtom)
+
+    const devices = useMemo(() => {
+      return [...lights, ...waterPumps]
+    }, [lights,waterPumps])
+   
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -65,17 +60,29 @@ import axios from 'axios';
 
     const handleToggleSwitch = async (id) => {
       try {
-        const res = await axios.post(`http://localhost:5000/api/adafruit/light-toggle/${id}`)
-        const tempDevices = [...devices].map((device) => {
-          if (device.id === id) return { ...device, active: !device.active };
-          return device;
-        });
-        setDevices(tempDevices);
+        const device = devices.find(item => item.id === id)
+        if(device.type === "light"){
+          const tempLights = [...lights].map((light) => {
+            if (light.id === id) return { ...light, active: !light.active };
+            return light;
+          });
+      
+          setLights(tempLights);
+        }
+        else{
+          const tempWaterPumps = [...waterPumps].map((waterpump) => {
+            if (waterpump.id === id)
+              return { ...waterpump, active: !waterpump.active };
+            return waterpump;
+          });
+          setWaterPumps(tempWaterPumps);
+        }
+        const res = await axios.post(`http://localhost:5000/api/adafruit/feed/${id}/${!device.active}`)
       } catch (error) {
         console.log({error})
       }
     };
-
+console.log(devices)
     return (
       <>
         <div className="devices__finder">
@@ -115,7 +122,7 @@ import axios from 'axios';
                   <td
                     onClick={() =>
                       navigateToDetailPage(
-                        device.category.toLowerCase().includes('light')
+                        device.type.toLowerCase().includes('light')
                           ? 'lights'
                           : 'water-pumps',
                         device.id
