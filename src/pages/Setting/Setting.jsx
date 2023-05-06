@@ -21,16 +21,17 @@ const Setting = () => {
     <div className='user padding-wrapper'>
       <h1 className="page-title">Setting</h1>
       <Avatar />
-        <hr></hr>
-        <div className='setting'>
+        <div className='setting holder'>
             <Link to="/user">
             <button>Personal Information</button>
-            </Link>
+            </Link><br/>
             <Link to="/password">
             <button>Password</button>
+            </Link><br/>
+            <Link to="/thresholds">
+            <button>Thresholds</button>
             </Link>
         </div>
-        <hr></hr>
     </div>
   )
 }

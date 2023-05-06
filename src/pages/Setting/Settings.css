@@ -43,14 +43,24 @@
     text-align: left;
     font-size: 20px;
 }
+.user .holder{
+    width:53em;
+    height:fit-content;
+    border: solid 2px var(--color-9bc898);
+    border-radius: 10px;
+    padding:0.5em 0;
+    margin:0.5em 0;
+    box-shadow: 5px 10px 10px #acacac;
+}
 .user .form .input {
     display: flex;
     margin:1em 0em;
 }
-.user .form .input label{
+.user .form .input label,.user .form .label label{
     font-weight: bold;
-    width:7em;
-    padding:0 6em
+    width:5em;
+    padding:0 6em;
+    margin-left:3em;
 }
 .user .form .input input{
     height:2.5em;
@@ -114,13 +124,15 @@
 }
 
 .setting{
-    display: flex;
-    justify-content: center;
+    display: block;
+    width:fit-content !important;
+    margin:3% 35% !important;
+    padding:3em 4em !important;
 }
 .setting button{
     width:15em;
     height:4em;
-    margin:0 .5em;
+    margin:.5em .5em;
     font-family: 'Roboto Condensed';
     background-color: var(--color-C8DCC6);
     border:none;
@@ -133,16 +145,31 @@
     cursor: pointer;
 }
 
-.minmax{
+.row{
     display: flex;
-    gap:5.5em;
-    justify-content: center;
-    margin-left:-1em;
 }
-.minmax h3{
-    margin:0;
-    font-size: 20px;
+.threshold {
+    margin:2em 2.5em;
+    height:5em;
+    width:20em;
+    padding:2em;
+    border: solid 2px var(--color-9bc898);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 5px 10px 10px #acacac;
 }
-.input #thresholds{
-    width: 8.5em;
+.threshold div{
+    display: flex;
+    margin-top:1em;
+}
+.threshold label{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.threshold input{
+    height:2.5em;
+    width:12em;
+    margin:0 0.5em;
+    border-radius: 5px;
+    border:solid 1px var(--color-383838)
 }

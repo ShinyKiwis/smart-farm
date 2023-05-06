@@ -31,11 +31,14 @@ const SetPassword = () => {
       <h1 className="page-title">Password</h1>
       <Avatar />
       <form className='form'>
-        <hr></hr>
-        <InputArea type="password" label = "Old Password" name = "OldPassword" placeholder="Old Password"/>
-        <hr></hr>
-        <InputArea type="password" label = "New Password" name = "Newpassword" placeholder="New Password"/>
-        <InputArea type="password" label = "Confirm New Password" name = "RePassword" placeholder="Re-enter New Password"/>
+        <div className='holder'>
+          <InputArea type="password" label = "Old Password" name = "OldPassword" placeholder="Old Password"/>
+        </div>
+        <br/>
+        <div className='holder'>
+          <InputArea type="password" label = "New Password" name = "Newpassword" placeholder="New Password"/>
+          <InputArea type="password" label = "Confirm New Password" name = "RePassword" placeholder="Re-enter New Password"/>
+        </div>
         <div className='submit'>
           <button type="submit" name="submit_password" className='save'>Change
           </button>

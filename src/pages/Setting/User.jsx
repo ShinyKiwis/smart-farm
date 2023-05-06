@@ -58,15 +58,13 @@ const User = () => {
       <h1 className="page-title">Users</h1>
       <form className='form'>
         <Avatar />
-        <hr></hr>
-        <InputArea type="text" label = "Username" name = "Username" placeholder="Username"/>
-        <hr></hr>
-        <InputArea type="text" label = "Fullname" name = "Fullname" placeholder="Push in boots"/>
-        <hr></hr>
-        <InputArea type="text" label = "Role" name = "Role" placeholder="Manager"/>
-        <hr></hr>
-        <InputArea type="text" label = "Email" name = "Email" placeholder="Email"/>
-        <InputArea type="password" label = "Password" name = "Password" placeholder="Password"/>
+        <div className='holder'>
+          <InputArea type="text" label = "Username" name = "Username" placeholder="Username"/>
+          <InputArea type="text" label = "Fullname" name = "Fullname" placeholder="Push in boots"/>
+          <InputArea type="text" label = "Role" name = "Role" placeholder="Manager"/>
+          <InputArea type="text" label = "Email" name = "Email" placeholder="Email"/>
+          <InputArea type="password" label = "Password" name = "Password" placeholder="Password"/>
+        </div>
         <div className='submit'>
           <button type="submit" name="submit" className='save'>Save
           </button>

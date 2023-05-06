@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Settings.css"
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Thresholds = () => {
@@ -41,6 +41,26 @@ const Thresholds = () => {
     setGDDMax(e.target.value);
   };
 
+  useEffect(() => {
+    const fetchThresholds = async () => {
+      try {
+        const result = await axios.get("http://localhost:5000/api/adafruit/threshold");
+        const data = result.data;
+        setTempMin(data[0].min);
+        setTempMax(data[0].max);
+        setHumidMin(data[1].min);
+        setHumidMax(data[1].max);
+        setMoisMin(data[2].min);
+        setMoisMax(data[2].max);
+        setGDDMin(data[3].min);
+        setGDDMax(data[3].max);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchThresholds();
+  }, []);
 
   const Onsubmitbtn = async (e) => {
     e.preventDefault();
@@ -56,7 +76,7 @@ const Thresholds = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div className='user padding-wrapper'>
@@ -64,77 +84,88 @@ const Thresholds = () => {
       <form className='form'>
         <br></br>
 
-        <div className='input'>
-            <label>Temperature:</label>
-            <input
-                type='number'
-                placeholder="Min"
-                id="thresholds"
-                onChange={onTempMinChange}
-            />
-            <input
-                type='number'
-                placeholder="Max"
-                id="thresholds"
-                onChange={onTempMaxChange}
-            />
+        <div className='row'>
+          <div className='threshold'>
+              <label>Temperature</label>
+              <div>
+                <input
+                    type='number'
+                    placeholder="Min"
+                    id="thresholds"
+                    onChange={onTempMinChange}
+                    value={TempMin}
+                />
+                <input
+                    type='number'
+                    placeholder="Max"
+                    id="thresholds"
+                    onChange={onTempMaxChange}
+                    value={TempMax}
+                />
+              </div>
+          </div>
+          <div className='threshold'>
+              <label>Moisture</label>
+              <div>
+                <input
+                    type='number'
+                    placeholder="Min"
+                    id="thresholds"
+                    onChange={onMoisMinChange}
+                    value={MoisMin}
+                />
+                <input
+                    type='number'
+                    placeholder="Max"
+                    id="thresholds"
+                    onChange={onMoisMaxChange}
+                    value={MoisMax}
+                />
+              </div>
+          </div>
         </div>
-        <hr></hr>
-        <div className='input'>
-            <label>Moisture:</label>
-            <input
-                type='number'
-                placeholder="Min"
-                id="thresholds"
-                onChange={onMoisMinChange}
-            />
-            <input
-                type='number'
-                placeholder="Max"
-                id="thresholds"
-                onChange={onMoisMaxChange}
-            />
-        </div>
-        <hr></hr>
-        <div className='input'>
-            <label>Hudmidity:</label>
-            <input
-                type='number'
-                placeholder="Min"
-                id="thresholds"
-                onChange={onHumidMinChange}
-            />
-            <input
-                type='number'
-                placeholder="Max"
-                id="thresholds"
-                onChange={onHumidMaxChange}
-            />
-        </div>
-        <hr></hr>
-        <div className='input'>
-            <label>GDD:</label>
-            <input
-                type='number'
-                placeholder="Min"
-                id="thresholds"
-                onChange={onGDDMinChange}
-            />
-            <input
-                type='number'
-                placeholder="Max"
-                id="thresholds"
-                onChange={onGDDMaxChange}
-            />
-        </div>
-        <hr></hr>
-
-        <div className='submit'>
-          <button onClick={Onsubmitbtn} name="submit" className='save'>Save</button>
+        <div className='row'>
+          <div className='threshold'>
+              <label>Hudmidity</label>
+              <div>
+                <input
+                    type='number'
+                    placeholder="Min"
+                    id="thresholds"
+                    onChange={onHumidMinChange}
+                    value={HumidMin}
+                />
+                <input
+                    type='number'
+                    placeholder="Max"
+                    id="thresholds"
+                    onChange={onHumidMaxChange}
+                    value={HumidMax}
+                />
+              </div>
+          </div>
+          <div className='threshold'>
+              <label>GDD</label>
+              <div>
+                <input
+                    type='number'
+                    placeholder="Min"
+                    id="thresholds"
+                    onChange={onGDDMinChange}
+                    value={GDDMin}
+                />
+                <input
+                    type='number'
+                    placeholder="Max"
+                    id="thresholds"
+                    onChange={onGDDMaxChange}
+                    value={GDDMax}
+                />
+              </div>
+          </div>
         </div>
       </form>
     </div>
-  )
+  );
 }
-
-export default Thresholds;
+export default Thresholds
