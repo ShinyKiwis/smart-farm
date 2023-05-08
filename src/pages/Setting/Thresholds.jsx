@@ -65,13 +65,13 @@ const Thresholds = () => {
   const Onsubmitbtn = async (e) => {
     e.preventDefault();
     try {
-      const responseTemp = await axios.post(`http://localhost:5000/api/adafruit/Temp/${TempMin}/${TempMax}`);
+      const responseTemp = await axios.post(`http://localhost:5000/api/adafruit/threshold/temperature/${TempMin}/${TempMax}`);
       console.log(responseTemp);
-      const responseMois = await axios.post(`http://localhost:5000/api/adafruit/Mois/${MoisMin}/${MoisMax}`);
+      const responseMois = await axios.post(`http://localhost:5000/api/adafruit/threshold/moisture/${MoisMin}/${MoisMax}`);
       console.log(responseMois);
-      const responseHumid = await axios.post(`http://localhost:5000/api/adafruit/Humid/${HumidMin}/${HumidMax}`);
+      const responseHumid = await axios.post(`http://localhost:5000/api/adafruit/threshold/humidity/${HumidMin}/${HumidMax}`);
       console.log(responseHumid);
-      const responseGDD = await axios.post(`http://localhost:5000/api/adafruit/GDD/${GDDMin}/${GDDMax}`);
+      const responseGDD = await axios.post(`http://localhost:5000/api/adafruit/threshold/gdd/${GDDMin}/${GDDMax}`);
       console.log(responseGDD);
     } catch (error) {
       console.error(error);
