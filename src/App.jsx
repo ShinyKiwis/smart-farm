@@ -4,7 +4,7 @@ import './App.css';
 import Lights from './components/Lights';
 import MainContent from './components/MainContent/MainContent';
 import WaterPumps from './components/WaterPumps';
-import SideBar from './components/SideBar/SideBar';
+import SideBar from './components/Sidebar/Sidebar';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Device from './pages/Device';
 import AllDevices from './pages/Device/AllDevices';
@@ -30,7 +30,7 @@ function App() {
     else setAuth(null)
   },[])
 
-  if(!auth){
+  if(false){
     return <Login/>
   }
 
