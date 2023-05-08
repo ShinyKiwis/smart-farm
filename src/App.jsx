@@ -30,7 +30,7 @@ function App() {
     else setAuth(null)
   },[])
 
-  if(!auth){
+  if(false){
     return <Login/>
   }
 

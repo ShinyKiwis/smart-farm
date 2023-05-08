@@ -164,6 +164,10 @@ const Thresholds = () => {
               </div>
           </div>
         </div>
+        <div className='submit'>
+          <button type="submit" name="submit" className='thresholdsubmit' onClick={Onsubmitbtn}>Save
+          </button>
+        </div>
       </form>
     </div>
   );
