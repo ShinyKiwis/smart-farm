@@ -98,6 +98,7 @@
     display: table;
     width: 100%;
     table-layout: fixed;/* even columns width , fix width of table too*/
+    margin-bottom: 5px;
 }
 
 .devices__table__actions{
