@@ -14,6 +14,7 @@ const ScheduleDetail = ({ schedule, onSave }) => {
   const [timeEnd, setTimeEnd] = useState(schedule.timeEnd ? schedule.timeEnd.slice(0, 5) : "00:00");
 
   const [days, setDays] = useState(schedule?.repeats || []);
+  const [description, setDescription] = useState(schedule.description || "")
   const handleChooseDay = (day) => {
     let tempDays = [...days];
     console.log('before, ', tempDays);
@@ -26,7 +27,7 @@ const ScheduleDetail = ({ schedule, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({timeStart, timeEnd, repeats:days, id: schedule._id});
+    onSave({timeStart, timeEnd, repeats:days, id: schedule._id, description});
   };
 
   return (
@@ -61,7 +62,7 @@ const ScheduleDetail = ({ schedule, onSave }) => {
       </div>
 
       <form onSubmit={handleSubmit} className="schedule-detail__field">
-        <input placeholder={schedule.description} />
+        <input value={description} onChange={(e) => setDescription(e.target.value)} />
         <button type="submit">SAVE</button>
       </form>
     </div>

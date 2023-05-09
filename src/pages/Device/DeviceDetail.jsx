@@ -76,7 +76,8 @@ const DeviceDetail = () => {
   const handleSaveSchedule = async (value) => {
     try {
       await axios.post(`http://localhost:5000/api/adafruit/schedule/${data.type}/${value.timeStart}/${value.timeEnd}/${value.repeats}`, {
-        _id: value.id
+        _id: value.id,
+        description: value.description
       })
     } catch (error) {
       console.log({error})
@@ -114,6 +115,7 @@ const DeviceDetail = () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/adafruit/schedule/${feedKey}`)
         if(res && res.data) setSchedule(res.data)
+        console.log(res.data)
       } catch (error) {
         console.log(error)
       }
