@@ -41,8 +41,9 @@
 
 .devices__finder__search, .devices__finder__filter{
     display: flex;
-    align-items: center;
+    justify-content: right;
     gap: 0.1rem;
+
 }
 
 .devices__finder__search input{
@@ -80,12 +81,11 @@
 
 .devices__table-container {
     height: 550px; /* set a fixed height */
-  }
-  
+}
+
 
 .devices__table{
     width: 100%;
-    border-collapse: separate;
     border-spacing: 0 0.2rem;
 }
 
@@ -94,11 +94,19 @@
     display: block;
 }
 
-.devices__table thead, tbody tr {
-    display: table;
+.devices__table thead tr,.devices__table tbody tr {
+    display: flex;
     width: 100%;
-    table-layout: fixed;/* even columns width , fix width of table too*/
+    margin:.5em 0;
+    justify-content: space-between;
 }
+.devices__table thead tr{
+    width:115%;
+}
+.devices__table thead tr th{
+    width:20em !important;
+}
+
 
 .devices__table__actions{
     display: flex;

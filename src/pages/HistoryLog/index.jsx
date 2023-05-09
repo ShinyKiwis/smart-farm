@@ -8,6 +8,7 @@ import "./styles.css"
 const HistoryLog = () => {
   const [logs, setLogs] = useState([]);
   const[isLoading, setIsLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchHistoryLog = async () => {
@@ -26,23 +27,26 @@ const HistoryLog = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredLogs = logs.filter((log) =>
+    log.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="devices padding-wrapper">
       <h1 className="page-title">History Log</h1>
 
       <div className="devices__finder">
         <div className="devices__finder__search">
-          <input placeholder="Search" />
+          <input placeholder="Search" value={searchTerm} onChange={handleSearch} />
           <span>
-            <FaSearch />
+            <FaSearch />  
           </span>
         </div>
-        <div className="devices__finder__filter">
-          <span>
-            <FaFilter />
-          </span>
-          <p>Add Filter</p>
-        </div>
+
       </div>
       <table cellSpacing="0" className="history-logs__table">
         <thead>
@@ -56,8 +60,11 @@ const HistoryLog = () => {
         </thead>
         <tbody>
           {isLoading && <p style={{ textAlign: 'center' }}>Loading...</p>}
-          {!isLoading && logs &&
-            logs.map((log) => (
+          {!isLoading && filteredLogs.length === 0 && (
+            <p style={{ textAlign: 'center' }}>No logs found.</p>
+          )}
+          {!isLoading && filteredLogs.length > 0 &&
+            filteredLogs.map((log) => (
               <tr key={log.id}>
                 <td style={{ width: '12%' }}>
                   {moment(log.time).format('HH:MM')}
@@ -66,7 +73,7 @@ const HistoryLog = () => {
                   {moment(log.time).format('DD/MM/YYYY')}
                 </td>
                 <td style={{ width: '15%', textTransform: 'capitalize' }}>
-                  {log.feed_key}
+ {log.feed_key}
                 </td>
                 <td
                   style={{

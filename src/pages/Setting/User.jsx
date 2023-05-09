@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "./Settings.css"
 import {useRef} from 'react';
+import axios from 'axios';
 
 
 
@@ -42,34 +43,68 @@ const Avatar = () => {
 }
 
 
-const InputArea = ({type,label,name, placeholder}) =>{
+
+const InputArea = ({type,label,name, placeholder, onChange}) =>{
   return (
       <div className='input'>
         <label>{label}:</label>
-        <input type={type} name = {name} placeholder  ={placeholder} />
+        <input type={type} name={name} placeholder={placeholder} onChange={onChange} />
       </div>
   )
 }
 
 
 const User = () => {
+  const [Username, setUsername] = useState('');
+  const onUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const [Fullname, setFullname] = useState();
+  const onFullnameChange = (e) => {
+    setFullname(e.target.value);
+  };
+
+  const [Email, setEmail] = useState();
+  const onEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const OnSubmitBtn = async(e) => {
+    e.preventDefault();
+    const storedUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "";
+    try {
+      const data = {
+        currentUsername: storedUser.username,
+        data: {
+          username: Username,
+          fullname: Fullname,
+          email: Email,
+        }
+      };
+      const Ndata = {"username":Username}
+      console.log(data);
+      window.localStorage.setItem('user', JSON.stringify({Username}))
+      console.log("Success update")
+      await axios.post("http://localhost:5000/api/user/update/info", data);  
+    } catch (error) {
+      console.error(error);
+      message.error("Failed in updating info");
+    }
+  }
+
   return (
     <div className='user padding-wrapper'>
       <h1 className="page-title">Users</h1>
       <form className='form'>
         <Avatar />
         <div className='holder'>
-          <InputArea type="text" label = "Username" name = "Username" placeholder="Username"/>
-          <InputArea type="text" label = "Fullname" name = "Fullname" placeholder="Push in boots"/>
-          <InputArea type="text" label = "Role" name = "Role" placeholder="Manager"/>
-          <InputArea type="text" label = "Email" name = "Email" placeholder="Email"/>
-          <InputArea type="password" label = "Password" name = "Password" placeholder="Password"/>
+          <InputArea type="text" label = "Username" name = "Username" placeholder="Username" onChange={onUsernameChange}/>
+          <InputArea type="text" label = "Fullname" name = "Fullname" placeholder="Push in boots" onChange={onFullnameChange}/>
+          <InputArea type="text" label = "Email" name = "Email" placeholder="Email" onChange={onEmailChange}/>
         </div>
         <div className='submit'>
-          <button type="submit" name="submit" className='save'>Save
-          </button>
-          <button type="submit" name="cancel">Cancel
-          </button>
+          <button type="submit" name="submit" className='save' onClick={OnSubmitBtn} disabled={!Username && !Fullname && !Email}>Save</button>
         </div>
       </form>
     </div>

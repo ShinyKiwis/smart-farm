@@ -25,7 +25,7 @@ const SideImage = () => {
 
 const LoginForm = () => {
   const [, setAuth] = useAtom(authAtom);
-  const [username, setUsername] = useState('');
+  const [Username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
   const handleAuthentication = async (e) => {
@@ -33,14 +33,14 @@ const LoginForm = () => {
     // setAuth({username})
     try {
       const resp = await axios.get(
-        `http://localhost:5000/api/user/${username}/${password}`
+        `http://localhost:5000/api/user/${Username}/${password}`
       );
       if(resp.data.error || !resp.data.status) {
         alert("Invalid credential!")
         return
       }
-      setAuth({username})
-      window.localStorage.setItem('user', JSON.stringify({username}))
+      setAuth({Username})
+      window.localStorage.setItem('user', JSON.stringify({Username}))
     } catch (error) {
       alert(error)
       console.log(error)
@@ -56,7 +56,7 @@ const LoginForm = () => {
       >
         <div className="form-group">
           <input
-            value={username}
+            value={Username}
             onChange={(e) => setUsername(e.target.value)}
             required
             type="text"

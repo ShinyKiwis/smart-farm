@@ -4,20 +4,24 @@
     border-spacing: 0 0.2rem;
 }
 
-.history-logs__table td{
-    word-break: break-all;
-    font-style: italic;
+.history-logs__table thead tr th, tbody tr td{
+    width:10em !important;
 }
-
 
 .history-logs__table tbody{
-    max-height: 70vh;
+    max-height: 65vh;
     display: block;
     overflow: auto;
+    width:70vw;
 }
 
-.history-logs__table thead, tbody tr {
-    display: table;
+.history-logs__table thead tr, tbody tr {
+    display: flex;
     width: 100%;
-    table-layout: fixed;/* even columns width , fix width of table too*/
+    margin:.5em 0;
+}
+
+.device-detail__schedule{
+    height:34em;
+    overflow: scroll;
 }

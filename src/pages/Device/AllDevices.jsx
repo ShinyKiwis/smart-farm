@@ -86,21 +86,12 @@ console.log(devices)
     return (
       <>
         <div className="devices__finder">
-          <div className="devices__finder__search">
-            <input placeholder="Search" />
-            <span>
-              <FaSearch />
-            </span>
-          </div>
+
           <div className="devices__finder__filter">
             <button className="devices__add" onClick={handleOpenAddModal}>
               <FaPlus fontSize="1rem" />
               Add Device
             </button>
-            <span>
-              <FaFilter />
-            </span>
-            <p>Add Filter</p>
           </div>
         </div>
         <div className="devices__table-container">
@@ -111,7 +102,6 @@ console.log(devices)
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Categoty</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -132,7 +122,6 @@ console.log(devices)
                   >
                     {device.name}
                   </td>
-                  <td>{device.category}</td>
                   <td>
                     <SwitchControl
                       active={device.active}
