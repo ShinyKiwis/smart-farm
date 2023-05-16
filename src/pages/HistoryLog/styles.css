@@ -9,7 +9,7 @@
 }
 
 .history-logs__table tbody{
-    max-height: 65vh;
+    max-height: 63vh;
     display: block;
     overflow: auto;
     width:70vw;
@@ -22,6 +22,31 @@
 }
 
 .device-detail__schedule{
-    height:34em;
+    height:30em;
     overflow: scroll;
 }
+
+.devices .pagination{
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top:.3em;
+}
+.devices .pagination li button{
+    width:fit-content;
+    padding:1em;
+    margin:0 .2em;
+    border:none;
+    border-radius: 5px;
+}
+.devices .pagination li button:hover{
+    background-color: #C8DCC6;
+    cursor: pointer;
+}
+.devices .pagination li.active button{
+    background-color: #C8DCC6;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
